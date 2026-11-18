@@ -1,0 +1,26 @@
+# Sobe o MySQL da API. Na primeira subida roda os scripts de db/ em ordem alfabética.
+# Para recriar o banco do zero: docker compose down -v && docker compose up -d
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: ordenha-mysql
+    environment:
+      MYSQL_DATABASE: ordenha
+      MYSQL_USER: ordenha
+      MYSQL_PASSWORD: ordenha
+      MYSQL_ROOT_PASSWORD: root
+      TZ: America/Sao_Paulo
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d:ro
+      - ordenha-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uordenha", "-pordenha"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  ordenha-mysql-data:
