@@ -1,0 +1,12 @@
+# Arquivos do Windows/WSL
+*:Zone.Identifier
+Thumbs.db
+.DS_Store
+
+# PDFs de referência (enunciado e planejamento) ficam fora do repositório
+/*.pdf
+
+# IDEs
+.idea/
+.vscode/
+*.iml
