@@ -1,0 +1,80 @@
+// Diagrama ER (modelo físico) da Ordenha Monitorada, notação pé de galinha.
+// Gerar a imagem:  dot -Tpng -Gdpi=200 diagrama_er.dot -o diagrama_er.png
+digraph ER {
+  graph [rankdir=LR, fontname="Helvetica", bgcolor="white", nodesep=0.6, ranksep=1.1, pad=0.3,
+         label="Ordenha Monitorada · Diagrama Entidade-Relacionamento (MySQL, banco ordenha)\nPK = chave primária · FK = chave estrangeira · UK = única · CK = check · AI = AUTO_INCREMENT",
+         labelloc=t, fontsize=16];
+  node  [shape=plain, fontname="Helvetica", fontsize=11];
+  edge  [dir=both, color="#444444", fontname="Helvetica", fontsize=10, penwidth=1.2];
+
+  usuario [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#1F4E79" colspan="2"><font color="white"><b>USUARIO</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left"></td><td align="left">nome VARCHAR(100) NN</td></tr>
+    <tr><td align="left">UK</td><td align="left">email VARCHAR(150) NN</td></tr>
+    <tr><td align="left"></td><td align="left">senha_hash VARCHAR(100) NN</td></tr>
+  </table>>];
+
+  propriedade [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#1F4E79" colspan="2"><font color="white"><b>PROPRIEDADE</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left">FK</td><td align="left">usuario_id BIGINT NN</td></tr>
+    <tr><td align="left"></td><td align="left">nome VARCHAR(100) NN</td></tr>
+    <tr><td align="left"></td><td align="left">municipio VARCHAR(100) NN</td></tr>
+    <tr><td align="left">CK</td><td align="left">uf CHAR(2) NN</td></tr>
+  </table>>];
+
+  vaca [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#2E7D32" colspan="2"><font color="white"><b>VACA</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left">FK, UK</td><td align="left">propriedade_id BIGINT NN</td></tr>
+    <tr><td align="left">UK</td><td align="left">brinco VARCHAR(20) NN</td></tr>
+    <tr><td align="left"></td><td align="left">nome VARCHAR(60)</td></tr>
+    <tr><td align="left"></td><td align="left">data_nascimento DATE</td></tr>
+    <tr><td align="left">CK</td><td align="left">status VARCHAR(20) NN<br/><font point-size="9">ATIVA | EM_TRATAMENTO | SECA</font></td></tr>
+  </table>>];
+
+  ordenha [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#2E7D32" colspan="2"><font color="white"><b>ORDENHA</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left">FK, UK</td><td align="left">vaca_id BIGINT NN</td></tr>
+    <tr><td align="left">UK</td><td align="left">data_hora DATETIME NN</td></tr>
+    <tr><td align="left">CK</td><td align="left">turno VARCHAR(10) NN<br/><font point-size="9">MANHA | TARDE</font></td></tr>
+    <tr><td align="left">CK</td><td align="left">litros DECIMAL(5,2) NN<br/><font point-size="9">&gt; 0 e &lt;= 80gt; 0 e &gt; 0 e &lt;= 80lt; 1000</font></td></tr>
+    <tr><td align="left">CK</td><td align="left">condutividade DECIMAL(6,3) NN<br/><font point-size="9">mS, &gt; 0</font></td></tr>
+  </table>>];
+
+  alerta [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#C62828" colspan="2"><font color="white"><b>ALERTA</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left">FK</td><td align="left">vaca_id BIGINT NN<br/><font point-size="9">FK composta com ordenha_id</font></td></tr>
+    <tr><td align="left">FK, UK</td><td align="left">ordenha_id BIGINT NN</td></tr>
+    <tr><td align="left">CK, UK</td><td align="left">tipo VARCHAR(30) NN<br/><font point-size="9">SUSPEITA_MASTITE | QUEDA_PRODUCAO<br/>LEITE_EM_CARENCIA</font></td></tr>
+    <tr><td align="left"></td><td align="left">mensagem VARCHAR(200) NN</td></tr>
+    <tr><td align="left"></td><td align="left">data_hora DATETIME NN</td></tr>
+    <tr><td align="left">CK</td><td align="left">resolvido TINYINT(1) NN<br/><font point-size="9">0 | 1</font></td></tr>
+  </table>>];
+
+  tratamento [label=<
+  <table border="0" cellborder="1" cellspacing="0" cellpadding="5">
+    <tr><td bgcolor="#6A1B9A" colspan="2"><font color="white"><b>TRATAMENTO</b></font></td></tr>
+    <tr><td align="left"><b>PK</b></td><td align="left"><u>id</u> BIGINT AI</td></tr>
+    <tr><td align="left">FK</td><td align="left">vaca_id BIGINT NN</td></tr>
+    <tr><td align="left"></td><td align="left">medicamento VARCHAR(100) NN</td></tr>
+    <tr><td align="left">CK</td><td align="left">data_inicio DATE NN</td></tr>
+    <tr><td align="left">CK</td><td align="left">data_fim DATE<br/><font point-size="9">vazio ou &gt;= data_inicio</font></td></tr>
+    <tr><td align="left">CK</td><td align="left">dias_carencia SMALLINT NN<br/><font point-size="9">&gt;= 0</font></td></tr>
+    <tr><td align="left"></td><td align="left">observacao VARCHAR(255)</td></tr>
+  </table>>];
+
+  usuario -> propriedade [arrowtail=teetee, arrowhead=crowodot, taillabel=" 1 ", headlabel=" 0..N ", label="possui"];
+  propriedade -> vaca     [arrowtail=teetee, arrowhead=crowodot, taillabel=" 1 ", headlabel=" 0..N ", label="tem"];
+  vaca -> ordenha         [arrowtail=teetee, arrowhead=crowodot, taillabel=" 1 ", headlabel=" 0..N ", label="gera"];
+  ordenha -> alerta       [arrowtail=teetee, arrowhead=crowodot, taillabel=" 1 ", headlabel=" 0..3 ", label="dispara\n(ordenha_id, vaca_id)"];
+  vaca -> tratamento      [arrowtail=teetee, arrowhead=crowodot, taillabel=" 1 ", headlabel=" 0..N ", label="recebe"];
+}

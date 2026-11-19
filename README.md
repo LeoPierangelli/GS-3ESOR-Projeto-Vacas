@@ -11,13 +11,15 @@ Cada parte tem a própria pasta, com um README explicando como rodar.
 
 | Parte | Pasta | Status |
 |---|---|---|
-| Banco de dados | — | a fazer |
+| Banco de dados | [`banco/`](banco/README.md) | pronta |
 | API RESTful + Segurança | [`api/`](api/README.md) | pronta |
 | Plano de testes | — | a fazer |
 | Front-end mobile | — | a fazer |
-| Simulação de IoT | — | a fazer |
+| Simulação de IoT | [`iot/`](iot/README.md) | pronta |
 
 Os nomes das tabelas, campos e rotas são os mesmos em todas as partes: `usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`.
+
+O contrato entre as partes (regras de alerta, usuários de teste, roteiro das vacas da carga e casos de teste) está em [`compartilhado/REGRAS.md`](compartilhado/REGRAS.md). O mock do app, com os mesmos dados do banco, está em [`compartilhado/mock_app.json`](compartilhado/mock_app.json).
 
 ## Vídeo pitch
 

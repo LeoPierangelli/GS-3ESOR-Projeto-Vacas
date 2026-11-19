@@ -1,0 +1,1171 @@
+{
+ "_leiaMe": "Ponto de partida do simulador: as mesmas ordenhas, tratamentos e alertas abertos da carga do banco. diaRelativo é contado a partir do dia em que o simulador roda pela primeira vez (ou com --reset).",
+ "ordenhas": [
+  {
+   "vacaId": 1,
+   "diaRelativo": -10,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 8.2,
+   "condutividade": 0.429
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -10,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.0,
+   "condutividade": 0.399
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -10,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 7.0,
+   "condutividade": 0.435
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -10,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.2,
+   "condutividade": 0.382
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -10,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -10,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 10.0,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -10,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.4,
+   "condutividade": 0.368
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -10,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.1,
+   "condutividade": 0.435
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -10,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.8,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -10,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.8,
+   "condutividade": 0.437
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -10,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.4,
+   "condutividade": 0.377
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -10,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.7,
+   "condutividade": 0.417
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -10,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 9.5,
+   "condutividade": 0.437
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -10,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.8,
+   "condutividade": 0.344
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -9,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 7.9,
+   "condutividade": 0.419
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -9,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.3,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -9,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.8,
+   "condutividade": 0.441
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -9,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.8,
+   "condutividade": 0.379
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -9,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.3,
+   "condutividade": 0.409
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -9,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 10.0,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -9,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.2,
+   "condutividade": 0.384
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -9,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 6.8,
+   "condutividade": 0.413
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -9,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.7,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -9,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 6.1,
+   "condutividade": 0.415
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -9,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.0,
+   "condutividade": 0.392
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -9,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.6,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -9,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 9.2,
+   "condutividade": 0.435
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -9,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.5,
+   "condutividade": 0.381
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -8,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 8.0,
+   "condutividade": 0.425
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -8,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 10.0,
+   "condutividade": 0.405
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -8,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 7.0,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -8,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.3,
+   "condutividade": 0.382
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -8,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.2,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -8,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 10.4,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -8,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.2,
+   "condutividade": 0.382
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -8,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.6,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -8,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.1,
+   "condutividade": 0.396
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -8,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 6.0,
+   "condutividade": 0.423
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -8,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.6,
+   "condutividade": 0.379
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -8,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.3,
+   "condutividade": 0.413
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -8,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 8.0,
+   "condutividade": 0.614
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -8,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.6,
+   "condutividade": 0.382
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -7,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 7.8,
+   "condutividade": 0.409
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -7,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.2,
+   "condutividade": 0.403
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -7,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -7,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.5,
+   "condutividade": 0.401
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -7,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.0,
+   "condutividade": 0.409
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -7,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 9.0,
+   "condutividade": 0.606
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -7,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.8,
+   "condutividade": 0.369
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -7,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 6.9,
+   "condutividade": 0.441
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -7,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.8,
+   "condutividade": 0.409
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -7,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 6.2,
+   "condutividade": 0.417
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -7,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.0,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -7,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 6.0,
+   "condutividade": 0.405
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -7,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 7.6,
+   "condutividade": 0.639
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -7,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.6,
+   "condutividade": 0.392
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -6,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 8.3,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -6,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.3,
+   "condutividade": 0.405
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -6,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.9,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -6,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.0,
+   "condutividade": 0.379
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -6,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.7,
+   "condutividade": 0.419
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -6,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 8.9,
+   "condutividade": 0.538
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -6,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.4,
+   "condutividade": 0.357
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -6,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 6.9,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -6,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.6,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -6,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.8,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -6,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.8,
+   "condutividade": 0.386
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -6,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.6,
+   "condutividade": 0.405
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -6,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 8.3,
+   "condutividade": 0.5
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -6,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 7.0,
+   "condutividade": 0.375
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -5,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 7.8,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -5,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.2,
+   "condutividade": 0.379
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -5,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 7.0,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -5,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.4,
+   "condutividade": 0.399
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -5,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -5,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 9.6,
+   "condutividade": 0.464
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -5,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.8,
+   "condutividade": 0.392
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -5,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.2,
+   "condutividade": 0.423
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -5,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.2,
+   "condutividade": 0.413
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -5,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 6.3,
+   "condutividade": 0.433
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -5,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.4,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -5,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.6,
+   "condutividade": 0.415
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -5,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 9.0,
+   "condutividade": 0.445
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -5,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.6,
+   "condutividade": 0.375
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -4,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 7.7,
+   "condutividade": 0.419
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -4,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.3,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -4,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.9,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -4,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.3,
+   "condutividade": 0.394
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -4,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.409
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -4,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 9.5,
+   "condutividade": 0.435
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -4,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.1,
+   "condutividade": 0.47
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -4,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.2,
+   "condutividade": 0.435
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -4,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.6,
+   "condutividade": 0.396
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -4,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.8,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -4,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.0,
+   "condutividade": 0.388
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -4,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.8,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -4,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 8.7,
+   "condutividade": 0.447
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -4,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.5,
+   "condutividade": 0.382
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -3,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 7.9,
+   "condutividade": 0.429
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -3,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.5,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -3,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.7,
+   "condutividade": 0.441
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -3,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 8.3,
+   "condutividade": 0.392
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -3,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.3,
+   "condutividade": 0.411
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -3,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 10.2,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -3,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.6,
+   "condutividade": 0.364
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -3,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.1,
+   "condutividade": 0.445
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -3,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.7,
+   "condutividade": 0.39
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -3,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.5,
+   "condutividade": 0.485
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -3,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 7.7,
+   "condutividade": 0.379
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -3,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.8,
+   "condutividade": 0.407
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -3,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 9.1,
+   "condutividade": 0.451
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -3,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.4,
+   "condutividade": 0.375
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -2,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 8.2,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -2,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.2,
+   "condutividade": 0.396
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -2,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.536
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -2,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 6.2,
+   "condutividade": 0.403
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -2,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.5,
+   "condutividade": 0.415
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -2,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 10.2,
+   "condutividade": 0.439
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -2,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.3,
+   "condutividade": 0.366
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -2,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.0,
+   "condutividade": 0.413
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -2,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 8.3,
+   "condutividade": 0.392
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -2,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.4,
+   "condutividade": 0.576
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -2,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 5.4,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -2,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.6,
+   "condutividade": 0.413
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -2,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 8.4,
+   "condutividade": 0.453
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -2,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.6,
+   "condutividade": 0.369
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -1,
+   "hora": "06:00",
+   "turno": "MANHA",
+   "litros": 8.1,
+   "condutividade": 0.421
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -1,
+   "hora": "06:04",
+   "turno": "MANHA",
+   "litros": 9.7,
+   "condutividade": 0.401
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -1,
+   "hora": "06:08",
+   "turno": "MANHA",
+   "litros": 6.0,
+   "condutividade": 0.555
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -1,
+   "hora": "06:12",
+   "turno": "MANHA",
+   "litros": 6.2,
+   "condutividade": 0.386
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -1,
+   "hora": "06:16",
+   "turno": "MANHA",
+   "litros": 6.4,
+   "condutividade": 0.396
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -1,
+   "hora": "06:20",
+   "turno": "MANHA",
+   "litros": 9.8,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -1,
+   "hora": "06:24",
+   "turno": "MANHA",
+   "litros": 7.6,
+   "condutividade": 0.377
+  },
+  {
+   "vacaId": 1,
+   "diaRelativo": -1,
+   "hora": "16:30",
+   "turno": "TARDE",
+   "litros": 7.1,
+   "condutividade": 0.431
+  },
+  {
+   "vacaId": 2,
+   "diaRelativo": -1,
+   "hora": "16:34",
+   "turno": "TARDE",
+   "litros": 9.0,
+   "condutividade": 0.398
+  },
+  {
+   "vacaId": 3,
+   "diaRelativo": -1,
+   "hora": "16:38",
+   "turno": "TARDE",
+   "litros": 5.2,
+   "condutividade": 0.567
+  },
+  {
+   "vacaId": 4,
+   "diaRelativo": -1,
+   "hora": "16:42",
+   "turno": "TARDE",
+   "litros": 5.1,
+   "condutividade": 0.369
+  },
+  {
+   "vacaId": 5,
+   "diaRelativo": -1,
+   "hora": "16:46",
+   "turno": "TARDE",
+   "litros": 5.3,
+   "condutividade": 0.427
+  },
+  {
+   "vacaId": 6,
+   "diaRelativo": -1,
+   "hora": "16:50",
+   "turno": "TARDE",
+   "litros": 8.7,
+   "condutividade": 0.453
+  },
+  {
+   "vacaId": 7,
+   "diaRelativo": -1,
+   "hora": "16:54",
+   "turno": "TARDE",
+   "litros": 6.5,
+   "condutividade": 0.381
+  }
+ ],
+ "tratamentos": [
+  {
+   "vacaId": 6,
+   "medicamento": "Anti-inflamatório",
+   "inicioRelativo": -48,
+   "fimRelativo": -46,
+   "diasCarencia": 2
+  },
+  {
+   "vacaId": 6,
+   "medicamento": "Cefalexina intramamária",
+   "inicioRelativo": -6,
+   "fimRelativo": -2,
+   "diasCarencia": 4
+  }
+ ],
+ "alertasAbertos": [
+  {
+   "vacaId": 3,
+   "tipo": "SUSPEITA_MASTITE"
+  },
+  {
+   "vacaId": 3,
+   "tipo": "SUSPEITA_MASTITE"
+  },
+  {
+   "vacaId": 3,
+   "tipo": "SUSPEITA_MASTITE"
+  },
+  {
+   "vacaId": 4,
+   "tipo": "QUEDA_PRODUCAO"
+  },
+  {
+   "vacaId": 6,
+   "tipo": "LEITE_EM_CARENCIA"
+  },
+  {
+   "vacaId": 3,
+   "tipo": "SUSPEITA_MASTITE"
+  },
+  {
+   "vacaId": 6,
+   "tipo": "LEITE_EM_CARENCIA"
+  }
+ ]
+}

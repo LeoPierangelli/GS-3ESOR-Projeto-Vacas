@@ -1,0 +1,950 @@
+{
+  "_leiaMe": "Mock do app gerado a partir da carga do banco (mesmos IDs, brincos e usuários da API). Chaves em camelCase, igual à API. Datas fixas do dia em que foi gerado. Condutividade em mS (escala do MastitAlert). 'painel' é derivado: situacao NORMAL | SUSPEITA | ATENCAO | EM_TRATAMENTO | SECA (SUSPEITA = alerta de mastite aberto; ATENCAO = outro alerta aberto). Login de teste: joao@exemplo.com / senha123.",
+  "geradoEm": "2026-11-18",
+  "usuario": {
+    "id": 1,
+    "nome": "João Ferreira",
+    "email": "joao@exemplo.com"
+  },
+  "propriedade": {
+    "id": 1,
+    "usuarioId": 1,
+    "nome": "Sítio Boa Vista",
+    "municipio": "Itamonte",
+    "uf": "MG"
+  },
+  "vacas": [
+    {
+      "id": 1,
+      "propriedadeId": 1,
+      "brinco": "BR-001",
+      "nome": "Bonita",
+      "dataNascimento": "2020-03-12",
+      "status": "ATIVA"
+    },
+    {
+      "id": 2,
+      "propriedadeId": 1,
+      "brinco": "BR-002",
+      "nome": "Malhada",
+      "dataNascimento": "2019-08-02",
+      "status": "ATIVA"
+    },
+    {
+      "id": 3,
+      "propriedadeId": 1,
+      "brinco": "BR-003",
+      "nome": "Mimosa",
+      "dataNascimento": "2021-01-20",
+      "status": "ATIVA"
+    },
+    {
+      "id": 4,
+      "propriedadeId": 1,
+      "brinco": "BR-004",
+      "nome": "Estrela",
+      "dataNascimento": "2018-11-05",
+      "status": "ATIVA"
+    },
+    {
+      "id": 5,
+      "propriedadeId": 1,
+      "brinco": "BR-005",
+      "nome": "Princesa",
+      "dataNascimento": "2022-02-14",
+      "status": "ATIVA"
+    }
+  ],
+  "painel": [
+    {
+      "vacaId": 1,
+      "situacao": "NORMAL",
+      "alertasAbertos": 0,
+      "ultimaCondutividade": 0.431,
+      "mediaCondutividade7": 0.428,
+      "litrosUltimos7Dias": 105.2
+    },
+    {
+      "vacaId": 2,
+      "situacao": "NORMAL",
+      "alertasAbertos": 0,
+      "ultimaCondutividade": 0.398,
+      "mediaCondutividade7": 0.4,
+      "litrosUltimos7Dias": 125.6
+    },
+    {
+      "vacaId": 3,
+      "situacao": "SUSPEITA",
+      "alertasAbertos": 4,
+      "ultimaCondutividade": 0.567,
+      "mediaCondutividade7": 0.492,
+      "litrosUltimos7Dias": 86.5
+    },
+    {
+      "vacaId": 4,
+      "situacao": "ATENCAO",
+      "alertasAbertos": 1,
+      "ultimaCondutividade": 0.369,
+      "mediaCondutividade7": 0.391,
+      "litrosUltimos7Dias": 101.3
+    },
+    {
+      "vacaId": 5,
+      "situacao": "NORMAL",
+      "alertasAbertos": 0,
+      "ultimaCondutividade": 0.427,
+      "mediaCondutividade7": 0.411,
+      "litrosUltimos7Dias": 84.4
+    }
+  ],
+  "alertas": [
+    {
+      "id": 20,
+      "vacaId": 3,
+      "ordenhaId": 136,
+      "tipo": "SUSPEITA_MASTITE",
+      "mensagem": "Suspeita de mastite: faça o teste da caneca ou o CMT",
+      "dataHora": "2026-11-17T16:38:00",
+      "resolvido": false
+    },
+    {
+      "id": 18,
+      "vacaId": 4,
+      "ordenhaId": 130,
+      "tipo": "QUEDA_PRODUCAO",
+      "mensagem": "Produção em queda",
+      "dataHora": "2026-11-17T06:12:00",
+      "resolvido": false
+    },
+    {
+      "id": 17,
+      "vacaId": 3,
+      "ordenhaId": 129,
+      "tipo": "SUSPEITA_MASTITE",
+      "mensagem": "Suspeita de mastite: faça o teste da caneca ou o CMT",
+      "dataHora": "2026-11-17T06:08:00",
+      "resolvido": false
+    },
+    {
+      "id": 15,
+      "vacaId": 3,
+      "ordenhaId": 122,
+      "tipo": "SUSPEITA_MASTITE",
+      "mensagem": "Suspeita de mastite: faça o teste da caneca ou o CMT",
+      "dataHora": "2026-11-16T16:38:00",
+      "resolvido": false
+    },
+    {
+      "id": 13,
+      "vacaId": 3,
+      "ordenhaId": 115,
+      "tipo": "SUSPEITA_MASTITE",
+      "mensagem": "Suspeita de mastite: faça o teste da caneca ou o CMT",
+      "dataHora": "2026-11-16T06:08:00",
+      "resolvido": false
+    }
+  ],
+  "tratamentos": [],
+  "ordenhas": [
+    {
+      "id": 1,
+      "vacaId": 1,
+      "dataHora": "2026-11-08T06:00:00",
+      "turno": "MANHA",
+      "litros": 8.2,
+      "condutividade": 0.429
+    },
+    {
+      "id": 2,
+      "vacaId": 2,
+      "dataHora": "2026-11-08T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.0,
+      "condutividade": 0.399
+    },
+    {
+      "id": 3,
+      "vacaId": 3,
+      "dataHora": "2026-11-08T06:08:00",
+      "turno": "MANHA",
+      "litros": 7.0,
+      "condutividade": 0.435
+    },
+    {
+      "id": 4,
+      "vacaId": 4,
+      "dataHora": "2026-11-08T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.2,
+      "condutividade": 0.382
+    },
+    {
+      "id": 5,
+      "vacaId": 5,
+      "dataHora": "2026-11-08T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.398
+    },
+    {
+      "id": 8,
+      "vacaId": 1,
+      "dataHora": "2026-11-08T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.1,
+      "condutividade": 0.435
+    },
+    {
+      "id": 9,
+      "vacaId": 2,
+      "dataHora": "2026-11-08T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.8,
+      "condutividade": 0.411
+    },
+    {
+      "id": 10,
+      "vacaId": 3,
+      "dataHora": "2026-11-08T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.8,
+      "condutividade": 0.437
+    },
+    {
+      "id": 11,
+      "vacaId": 4,
+      "dataHora": "2026-11-08T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.4,
+      "condutividade": 0.377
+    },
+    {
+      "id": 12,
+      "vacaId": 5,
+      "dataHora": "2026-11-08T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.7,
+      "condutividade": 0.417
+    },
+    {
+      "id": 15,
+      "vacaId": 1,
+      "dataHora": "2026-11-09T06:00:00",
+      "turno": "MANHA",
+      "litros": 7.9,
+      "condutividade": 0.419
+    },
+    {
+      "id": 16,
+      "vacaId": 2,
+      "dataHora": "2026-11-09T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.3,
+      "condutividade": 0.411
+    },
+    {
+      "id": 17,
+      "vacaId": 3,
+      "dataHora": "2026-11-09T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.8,
+      "condutividade": 0.441
+    },
+    {
+      "id": 18,
+      "vacaId": 4,
+      "dataHora": "2026-11-09T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.8,
+      "condutividade": 0.379
+    },
+    {
+      "id": 19,
+      "vacaId": 5,
+      "dataHora": "2026-11-09T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.3,
+      "condutividade": 0.409
+    },
+    {
+      "id": 22,
+      "vacaId": 1,
+      "dataHora": "2026-11-09T16:30:00",
+      "turno": "TARDE",
+      "litros": 6.8,
+      "condutividade": 0.413
+    },
+    {
+      "id": 23,
+      "vacaId": 2,
+      "dataHora": "2026-11-09T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.7,
+      "condutividade": 0.407
+    },
+    {
+      "id": 24,
+      "vacaId": 3,
+      "dataHora": "2026-11-09T16:38:00",
+      "turno": "TARDE",
+      "litros": 6.1,
+      "condutividade": 0.415
+    },
+    {
+      "id": 25,
+      "vacaId": 4,
+      "dataHora": "2026-11-09T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.0,
+      "condutividade": 0.392
+    },
+    {
+      "id": 26,
+      "vacaId": 5,
+      "dataHora": "2026-11-09T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.6,
+      "condutividade": 0.421
+    },
+    {
+      "id": 29,
+      "vacaId": 1,
+      "dataHora": "2026-11-10T06:00:00",
+      "turno": "MANHA",
+      "litros": 8.0,
+      "condutividade": 0.425
+    },
+    {
+      "id": 30,
+      "vacaId": 2,
+      "dataHora": "2026-11-10T06:04:00",
+      "turno": "MANHA",
+      "litros": 10.0,
+      "condutividade": 0.405
+    },
+    {
+      "id": 31,
+      "vacaId": 3,
+      "dataHora": "2026-11-10T06:08:00",
+      "turno": "MANHA",
+      "litros": 7.0,
+      "condutividade": 0.427
+    },
+    {
+      "id": 32,
+      "vacaId": 4,
+      "dataHora": "2026-11-10T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.3,
+      "condutividade": 0.382
+    },
+    {
+      "id": 33,
+      "vacaId": 5,
+      "dataHora": "2026-11-10T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.2,
+      "condutividade": 0.411
+    },
+    {
+      "id": 36,
+      "vacaId": 1,
+      "dataHora": "2026-11-10T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.6,
+      "condutividade": 0.407
+    },
+    {
+      "id": 37,
+      "vacaId": 2,
+      "dataHora": "2026-11-10T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.1,
+      "condutividade": 0.396
+    },
+    {
+      "id": 38,
+      "vacaId": 3,
+      "dataHora": "2026-11-10T16:38:00",
+      "turno": "TARDE",
+      "litros": 6.0,
+      "condutividade": 0.423
+    },
+    {
+      "id": 39,
+      "vacaId": 4,
+      "dataHora": "2026-11-10T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.6,
+      "condutividade": 0.379
+    },
+    {
+      "id": 40,
+      "vacaId": 5,
+      "dataHora": "2026-11-10T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.3,
+      "condutividade": 0.413
+    },
+    {
+      "id": 43,
+      "vacaId": 1,
+      "dataHora": "2026-11-11T06:00:00",
+      "turno": "MANHA",
+      "litros": 7.8,
+      "condutividade": 0.409
+    },
+    {
+      "id": 44,
+      "vacaId": 2,
+      "dataHora": "2026-11-11T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.2,
+      "condutividade": 0.403
+    },
+    {
+      "id": 45,
+      "vacaId": 3,
+      "dataHora": "2026-11-11T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.431
+    },
+    {
+      "id": 46,
+      "vacaId": 4,
+      "dataHora": "2026-11-11T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.5,
+      "condutividade": 0.401
+    },
+    {
+      "id": 47,
+      "vacaId": 5,
+      "dataHora": "2026-11-11T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.0,
+      "condutividade": 0.409
+    },
+    {
+      "id": 50,
+      "vacaId": 1,
+      "dataHora": "2026-11-11T16:30:00",
+      "turno": "TARDE",
+      "litros": 6.9,
+      "condutividade": 0.441
+    },
+    {
+      "id": 51,
+      "vacaId": 2,
+      "dataHora": "2026-11-11T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.8,
+      "condutividade": 0.409
+    },
+    {
+      "id": 52,
+      "vacaId": 3,
+      "dataHora": "2026-11-11T16:38:00",
+      "turno": "TARDE",
+      "litros": 6.2,
+      "condutividade": 0.417
+    },
+    {
+      "id": 53,
+      "vacaId": 4,
+      "dataHora": "2026-11-11T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.0,
+      "condutividade": 0.398
+    },
+    {
+      "id": 54,
+      "vacaId": 5,
+      "dataHora": "2026-11-11T16:46:00",
+      "turno": "TARDE",
+      "litros": 6.0,
+      "condutividade": 0.405
+    },
+    {
+      "id": 57,
+      "vacaId": 1,
+      "dataHora": "2026-11-12T06:00:00",
+      "turno": "MANHA",
+      "litros": 8.3,
+      "condutividade": 0.431
+    },
+    {
+      "id": 58,
+      "vacaId": 2,
+      "dataHora": "2026-11-12T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.3,
+      "condutividade": 0.405
+    },
+    {
+      "id": 59,
+      "vacaId": 3,
+      "dataHora": "2026-11-12T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.9,
+      "condutividade": 0.431
+    },
+    {
+      "id": 60,
+      "vacaId": 4,
+      "dataHora": "2026-11-12T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.0,
+      "condutividade": 0.379
+    },
+    {
+      "id": 61,
+      "vacaId": 5,
+      "dataHora": "2026-11-12T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.7,
+      "condutividade": 0.419
+    },
+    {
+      "id": 64,
+      "vacaId": 1,
+      "dataHora": "2026-11-12T16:30:00",
+      "turno": "TARDE",
+      "litros": 6.9,
+      "condutividade": 0.407
+    },
+    {
+      "id": 65,
+      "vacaId": 2,
+      "dataHora": "2026-11-12T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.6,
+      "condutividade": 0.407
+    },
+    {
+      "id": 66,
+      "vacaId": 3,
+      "dataHora": "2026-11-12T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.8,
+      "condutividade": 0.421
+    },
+    {
+      "id": 67,
+      "vacaId": 4,
+      "dataHora": "2026-11-12T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.8,
+      "condutividade": 0.386
+    },
+    {
+      "id": 68,
+      "vacaId": 5,
+      "dataHora": "2026-11-12T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.6,
+      "condutividade": 0.405
+    },
+    {
+      "id": 71,
+      "vacaId": 1,
+      "dataHora": "2026-11-13T06:00:00",
+      "turno": "MANHA",
+      "litros": 7.8,
+      "condutividade": 0.421
+    },
+    {
+      "id": 72,
+      "vacaId": 2,
+      "dataHora": "2026-11-13T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.2,
+      "condutividade": 0.379
+    },
+    {
+      "id": 73,
+      "vacaId": 3,
+      "dataHora": "2026-11-13T06:08:00",
+      "turno": "MANHA",
+      "litros": 7.0,
+      "condutividade": 0.407
+    },
+    {
+      "id": 74,
+      "vacaId": 4,
+      "dataHora": "2026-11-13T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.4,
+      "condutividade": 0.399
+    },
+    {
+      "id": 75,
+      "vacaId": 5,
+      "dataHora": "2026-11-13T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.398
+    },
+    {
+      "id": 78,
+      "vacaId": 1,
+      "dataHora": "2026-11-13T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.2,
+      "condutividade": 0.423
+    },
+    {
+      "id": 79,
+      "vacaId": 2,
+      "dataHora": "2026-11-13T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.2,
+      "condutividade": 0.413
+    },
+    {
+      "id": 80,
+      "vacaId": 3,
+      "dataHora": "2026-11-13T16:38:00",
+      "turno": "TARDE",
+      "litros": 6.3,
+      "condutividade": 0.433
+    },
+    {
+      "id": 81,
+      "vacaId": 4,
+      "dataHora": "2026-11-13T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.4,
+      "condutividade": 0.398
+    },
+    {
+      "id": 82,
+      "vacaId": 5,
+      "dataHora": "2026-11-13T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.6,
+      "condutividade": 0.415
+    },
+    {
+      "id": 85,
+      "vacaId": 1,
+      "dataHora": "2026-11-14T06:00:00",
+      "turno": "MANHA",
+      "litros": 7.7,
+      "condutividade": 0.419
+    },
+    {
+      "id": 86,
+      "vacaId": 2,
+      "dataHora": "2026-11-14T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.3,
+      "condutividade": 0.411
+    },
+    {
+      "id": 87,
+      "vacaId": 3,
+      "dataHora": "2026-11-14T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.9,
+      "condutividade": 0.427
+    },
+    {
+      "id": 88,
+      "vacaId": 4,
+      "dataHora": "2026-11-14T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.3,
+      "condutividade": 0.394
+    },
+    {
+      "id": 89,
+      "vacaId": 5,
+      "dataHora": "2026-11-14T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.409
+    },
+    {
+      "id": 92,
+      "vacaId": 1,
+      "dataHora": "2026-11-14T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.2,
+      "condutividade": 0.435
+    },
+    {
+      "id": 93,
+      "vacaId": 2,
+      "dataHora": "2026-11-14T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.6,
+      "condutividade": 0.396
+    },
+    {
+      "id": 94,
+      "vacaId": 3,
+      "dataHora": "2026-11-14T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.8,
+      "condutividade": 0.427
+    },
+    {
+      "id": 95,
+      "vacaId": 4,
+      "dataHora": "2026-11-14T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.0,
+      "condutividade": 0.388
+    },
+    {
+      "id": 96,
+      "vacaId": 5,
+      "dataHora": "2026-11-14T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.8,
+      "condutividade": 0.427
+    },
+    {
+      "id": 99,
+      "vacaId": 1,
+      "dataHora": "2026-11-15T06:00:00",
+      "turno": "MANHA",
+      "litros": 7.9,
+      "condutividade": 0.429
+    },
+    {
+      "id": 100,
+      "vacaId": 2,
+      "dataHora": "2026-11-15T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.5,
+      "condutividade": 0.411
+    },
+    {
+      "id": 101,
+      "vacaId": 3,
+      "dataHora": "2026-11-15T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.7,
+      "condutividade": 0.441
+    },
+    {
+      "id": 102,
+      "vacaId": 4,
+      "dataHora": "2026-11-15T06:12:00",
+      "turno": "MANHA",
+      "litros": 8.3,
+      "condutividade": 0.392
+    },
+    {
+      "id": 103,
+      "vacaId": 5,
+      "dataHora": "2026-11-15T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.3,
+      "condutividade": 0.411
+    },
+    {
+      "id": 106,
+      "vacaId": 1,
+      "dataHora": "2026-11-15T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.1,
+      "condutividade": 0.445
+    },
+    {
+      "id": 107,
+      "vacaId": 2,
+      "dataHora": "2026-11-15T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.7,
+      "condutividade": 0.39
+    },
+    {
+      "id": 108,
+      "vacaId": 3,
+      "dataHora": "2026-11-15T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.5,
+      "condutividade": 0.485
+    },
+    {
+      "id": 109,
+      "vacaId": 4,
+      "dataHora": "2026-11-15T16:42:00",
+      "turno": "TARDE",
+      "litros": 7.7,
+      "condutividade": 0.379
+    },
+    {
+      "id": 110,
+      "vacaId": 5,
+      "dataHora": "2026-11-15T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.8,
+      "condutividade": 0.407
+    },
+    {
+      "id": 113,
+      "vacaId": 1,
+      "dataHora": "2026-11-16T06:00:00",
+      "turno": "MANHA",
+      "litros": 8.2,
+      "condutividade": 0.431
+    },
+    {
+      "id": 114,
+      "vacaId": 2,
+      "dataHora": "2026-11-16T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.2,
+      "condutividade": 0.396
+    },
+    {
+      "id": 115,
+      "vacaId": 3,
+      "dataHora": "2026-11-16T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.536
+    },
+    {
+      "id": 116,
+      "vacaId": 4,
+      "dataHora": "2026-11-16T06:12:00",
+      "turno": "MANHA",
+      "litros": 6.2,
+      "condutividade": 0.403
+    },
+    {
+      "id": 117,
+      "vacaId": 5,
+      "dataHora": "2026-11-16T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.5,
+      "condutividade": 0.415
+    },
+    {
+      "id": 120,
+      "vacaId": 1,
+      "dataHora": "2026-11-16T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.0,
+      "condutividade": 0.413
+    },
+    {
+      "id": 121,
+      "vacaId": 2,
+      "dataHora": "2026-11-16T16:34:00",
+      "turno": "TARDE",
+      "litros": 8.3,
+      "condutividade": 0.392
+    },
+    {
+      "id": 122,
+      "vacaId": 3,
+      "dataHora": "2026-11-16T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.4,
+      "condutividade": 0.576
+    },
+    {
+      "id": 123,
+      "vacaId": 4,
+      "dataHora": "2026-11-16T16:42:00",
+      "turno": "TARDE",
+      "litros": 5.4,
+      "condutividade": 0.398
+    },
+    {
+      "id": 124,
+      "vacaId": 5,
+      "dataHora": "2026-11-16T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.6,
+      "condutividade": 0.413
+    },
+    {
+      "id": 127,
+      "vacaId": 1,
+      "dataHora": "2026-11-17T06:00:00",
+      "turno": "MANHA",
+      "litros": 8.1,
+      "condutividade": 0.421
+    },
+    {
+      "id": 128,
+      "vacaId": 2,
+      "dataHora": "2026-11-17T06:04:00",
+      "turno": "MANHA",
+      "litros": 9.7,
+      "condutividade": 0.401
+    },
+    {
+      "id": 129,
+      "vacaId": 3,
+      "dataHora": "2026-11-17T06:08:00",
+      "turno": "MANHA",
+      "litros": 6.0,
+      "condutividade": 0.555
+    },
+    {
+      "id": 130,
+      "vacaId": 4,
+      "dataHora": "2026-11-17T06:12:00",
+      "turno": "MANHA",
+      "litros": 6.2,
+      "condutividade": 0.386
+    },
+    {
+      "id": 131,
+      "vacaId": 5,
+      "dataHora": "2026-11-17T06:16:00",
+      "turno": "MANHA",
+      "litros": 6.4,
+      "condutividade": 0.396
+    },
+    {
+      "id": 134,
+      "vacaId": 1,
+      "dataHora": "2026-11-17T16:30:00",
+      "turno": "TARDE",
+      "litros": 7.1,
+      "condutividade": 0.431
+    },
+    {
+      "id": 135,
+      "vacaId": 2,
+      "dataHora": "2026-11-17T16:34:00",
+      "turno": "TARDE",
+      "litros": 9.0,
+      "condutividade": 0.398
+    },
+    {
+      "id": 136,
+      "vacaId": 3,
+      "dataHora": "2026-11-17T16:38:00",
+      "turno": "TARDE",
+      "litros": 5.2,
+      "condutividade": 0.567
+    },
+    {
+      "id": 137,
+      "vacaId": 4,
+      "dataHora": "2026-11-17T16:42:00",
+      "turno": "TARDE",
+      "litros": 5.1,
+      "condutividade": 0.369
+    },
+    {
+      "id": 138,
+      "vacaId": 5,
+      "dataHora": "2026-11-17T16:46:00",
+      "turno": "TARDE",
+      "litros": 5.3,
+      "condutividade": 0.427
+    }
+  ]
+}

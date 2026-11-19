@@ -1,184 +1,228 @@
--- =============================================================
--- Ordenha Monitorada - carga inicial (PROVISÓRIA, gerada por script)
--- Senha dos dois usuários de exemplo: senha123 (gravada só como hash BCrypt)
--- Vaca 3 (Mimosa): condutividade subindo | Vaca 4 (Estrela): produção caindo
--- Vaca 6 (Pintada): em tratamento/carência | Vaca 8 (Serena): seca
--- =============================================================
+-- CÓPIA de banco/02_carga_inicial.sql feita por ferramentas/gerar_dados.py.
+-- O original (e oficial) fica na pasta banco/. Não edite esta cópia.
+-- =============================================================================
+-- ORDENHA MONITORADA · Parte 1 (Banco de dados)
+-- Script 02 de 03: carga inicial. Rode DEPOIS do 01_criar_tabelas.sql.
+-- ARQUIVO GERADO por ferramentas/gerar_dados.py; não edite à mão.
+--
+-- As datas são relativas ao dia da execução: a carga cobre os 10 dias
+-- anteriores a hoje (CURDATE() - 10 dias até CURDATE() - 1 dia).
+-- Usuários de teste (senha senha123, gravada só como hash BCrypt):
+--   joao@exemplo.com
+--   maria@exemplo.com
+-- Os alertas foram calculados com as mesmas regras da API (RegrasAlertaService).
+--
+-- Roteiro do rebanho (para consultas, testes e vídeo):
+--   vaca 1 BR-001 Bonita    Normal
+--   vaca 2 BR-002 Malhada   Normal
+--   vaca 3 BR-003 Mimosa    Condutividade subindo nos últimos dias: alertas de SUSPEITA_MASTITE abertos
+--   vaca 4 BR-004 Estrela   Produção caindo nas 4 últimas ordenhas: QUEDA_PRODUCAO aberta
+--   vaca 5 BR-005 Princesa  Normal
+--   vaca 6 SL-010 Pintada   Mastite nos dias -8/-7, tratada desde o dia -6: LEITE_EM_CARENCIA aberto; 2 tratamentos em 12 meses
+--   vaca 7 SL-011 Faceira   Pico isolado no dia -4: alerta resolvido (CMT negativo, falso positivo)
+--   vaca 8 SL-012 Serena    Seca: não é ordenhada
+-- =============================================================================
+
 SET NAMES utf8mb4;
+USE ordenha;
 
-INSERT INTO usuario (id, nome, email, senha_hash) VALUES
-  (1, 'João Ferreira', 'joao@exemplo.com', '$2a$10$dJLHVPXnJCFg2aOsSeMXkuGM0cHLJ1x5w1ZfXJGY.gg2q.GtbdWta'),
-  (2, 'Maria Souza', 'maria@exemplo.com', '$2a$10$yv/JYJu1n4mCM0SbBcfUqO/NxVYjDnDuLnaoEBPkxFrkpapUekcZK');
+START TRANSACTION;
 
-INSERT INTO propriedade (id, usuario_id, nome, municipio, uf) VALUES
-  (1, 1, 'Sítio Boa Vista', 'Itamonte', 'MG'),
-  (2, 2, 'Fazendinha Santa Luzia', 'Pouso Alegre', 'MG');
+-- USUARIO
+INSERT INTO usuario (id, nome, email, senha_hash) VALUES (1, 'João Ferreira', 'joao@exemplo.com', '$2a$10$dJLHVPXnJCFg2aOsSeMXkuGM0cHLJ1x5w1ZfXJGY.gg2q.GtbdWta');
+INSERT INTO usuario (id, nome, email, senha_hash) VALUES (2, 'Maria Souza', 'maria@exemplo.com', '$2a$10$yv/JYJu1n4mCM0SbBcfUqO/NxVYjDnDuLnaoEBPkxFrkpapUekcZK');
 
-INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES
-  (1, 1, 'BR-001', 'Bonita', '2020-03-12', 'ATIVA'),
-  (2, 1, 'BR-002', 'Malhada', '2019-08-02', 'ATIVA'),
-  (3, 1, 'BR-003', 'Mimosa', '2021-01-20', 'ATIVA'),
-  (4, 1, 'BR-004', 'Estrela', '2018-11-05', 'ATIVA'),
-  (5, 1, 'BR-005', 'Princesa', '2022-02-14', 'ATIVA'),
-  (6, 2, 'SL-010', 'Pintada', '2020-06-30', 'EM_TRATAMENTO'),
-  (7, 2, 'SL-011', 'Faceira', '2021-09-09', 'ATIVA'),
-  (8, 2, 'SL-012', 'Serena', '2017-04-18', 'SECA');
+-- PROPRIEDADE
+INSERT INTO propriedade (id, usuario_id, nome, municipio, uf) VALUES (1, 1, 'Sítio Boa Vista', 'Itamonte', 'MG');
+INSERT INTO propriedade (id, usuario_id, nome, municipio, uf) VALUES (2, 2, 'Fazendinha Santa Luzia', 'Pouso Alegre', 'MG');
 
-INSERT INTO tratamento (id, vaca_id, medicamento, data_inicio, data_fim, dias_carencia, observacao) VALUES
-  (1, 6, 'Cefalexina intramamária', '2026-11-15', '2026-11-18', 4, 'Quarto posterior esquerdo'),
-  (2, 6, 'Anti-inflamatório', '2026-10-01', '2026-10-03', 2, 'Tratamento anterior, já liberado');
+-- VACA
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (1, 1, 'BR-001', 'Bonita', DATE '2020-03-12', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (2, 1, 'BR-002', 'Malhada', DATE '2019-08-02', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (3, 1, 'BR-003', 'Mimosa', DATE '2021-01-20', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (4, 1, 'BR-004', 'Estrela', DATE '2018-11-05', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (5, 1, 'BR-005', 'Princesa', DATE '2022-02-14', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (6, 2, 'SL-010', 'Pintada', DATE '2020-06-30', 'EM_TRATAMENTO');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (7, 2, 'SL-011', 'Faceira', DATE '2021-09-09', 'ATIVA');
+INSERT INTO vaca (id, propriedade_id, brinco, nome, data_nascimento, status) VALUES (8, 2, 'SL-012', 'Serena', DATE '2017-04-18', 'SECA');
 
-INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES
-  (1, 1, '2026-11-08 06:05:00', 'MANHA', 12.17, 4.66),
-  (2, 2, '2026-11-08 06:10:00', 'MANHA', 10.23, 5.02),
-  (3, 3, '2026-11-08 06:15:00', 'MANHA', 11.78, 4.95),
-  (4, 4, '2026-11-08 06:20:00', 'MANHA', 13.47, 4.88),
-  (5, 5, '2026-11-08 06:25:00', 'MANHA', 8.91, 5.06),
-  (6, 6, '2026-11-08 06:30:00', 'MANHA', 10.66, 5.00),
-  (7, 7, '2026-11-08 06:35:00', 'MANHA', 9.43, 4.61),
-  (8, 1, '2026-11-08 16:05:00', 'TARDE', 9.74, 4.81),
-  (9, 2, '2026-11-08 16:10:00', 'TARDE', 8.13, 5.13),
-  (10, 3, '2026-11-08 16:15:00', 'TARDE', 9.50, 4.75),
-  (11, 4, '2026-11-08 16:20:00', 'TARDE', 10.69, 5.06),
-  (12, 5, '2026-11-08 16:25:00', 'TARDE', 7.05, 5.10),
-  (13, 6, '2026-11-08 16:30:00', 'TARDE', 9.24, 4.95),
-  (14, 7, '2026-11-08 16:35:00', 'TARDE', 7.61, 4.58),
-  (15, 1, '2026-11-09 06:05:00', 'MANHA', 12.42, 4.83),
-  (16, 2, '2026-11-09 06:10:00', 'MANHA', 10.87, 5.17),
-  (17, 3, '2026-11-09 06:15:00', 'MANHA', 11.54, 5.04),
-  (18, 4, '2026-11-09 06:20:00', 'MANHA', 12.85, 5.02),
-  (19, 5, '2026-11-09 06:25:00', 'MANHA', 9.40, 5.24),
-  (20, 6, '2026-11-09 06:30:00', 'MANHA', 11.43, 5.02),
-  (21, 7, '2026-11-09 06:35:00', 'MANHA', 10.25, 4.56),
-  (22, 1, '2026-11-09 16:05:00', 'TARDE', 9.34, 4.74),
-  (23, 2, '2026-11-09 16:10:00', 'TARDE', 8.00, 5.02),
-  (24, 3, '2026-11-09 16:15:00', 'TARDE', 8.82, 4.83),
-  (25, 4, '2026-11-09 16:20:00', 'TARDE', 10.53, 4.96),
-  (26, 5, '2026-11-09 16:25:00', 'TARDE', 7.08, 5.11),
-  (27, 6, '2026-11-09 16:30:00', 'TARDE', 8.58, 5.13),
-  (28, 7, '2026-11-09 16:35:00', 'TARDE', 8.14, 4.73),
-  (29, 1, '2026-11-10 06:05:00', 'MANHA', 11.61, 4.87),
-  (30, 2, '2026-11-10 06:10:00', 'MANHA', 10.10, 5.06),
-  (31, 3, '2026-11-10 06:15:00', 'MANHA', 12.09, 4.94),
-  (32, 4, '2026-11-10 06:20:00', 'MANHA', 13.07, 5.06),
-  (33, 5, '2026-11-10 06:25:00', 'MANHA', 9.41, 5.28),
-  (34, 6, '2026-11-10 06:30:00', 'MANHA', 10.67, 4.86),
-  (35, 7, '2026-11-10 06:35:00', 'MANHA', 9.78, 4.63),
-  (36, 1, '2026-11-10 16:05:00', 'TARDE', 9.32, 4.93),
-  (37, 2, '2026-11-10 16:10:00', 'TARDE', 8.76, 5.04),
-  (38, 3, '2026-11-10 16:15:00', 'TARDE', 9.35, 4.87),
-  (39, 4, '2026-11-10 16:20:00', 'TARDE', 10.80, 4.99),
-  (40, 5, '2026-11-10 16:25:00', 'TARDE', 6.97, 5.12),
-  (41, 6, '2026-11-10 16:30:00', 'TARDE', 8.86, 4.93),
-  (42, 7, '2026-11-10 16:35:00', 'TARDE', 8.08, 4.82),
-  (43, 1, '2026-11-11 06:05:00', 'MANHA', 11.88, 4.72),
-  (44, 2, '2026-11-11 06:10:00', 'MANHA', 11.10, 5.10),
-  (45, 3, '2026-11-11 06:15:00', 'MANHA', 11.01, 4.76),
-  (46, 4, '2026-11-11 06:20:00', 'MANHA', 12.53, 5.04),
-  (47, 5, '2026-11-11 06:25:00', 'MANHA', 9.35, 5.18),
-  (48, 6, '2026-11-11 06:30:00', 'MANHA', 10.48, 4.96),
-  (49, 7, '2026-11-11 06:35:00', 'MANHA', 10.60, 4.71),
-  (50, 1, '2026-11-11 16:05:00', 'TARDE', 10.05, 4.91),
-  (51, 2, '2026-11-11 16:10:00', 'TARDE', 7.93, 5.17),
-  (52, 3, '2026-11-11 16:15:00', 'TARDE', 9.37, 4.91),
-  (53, 4, '2026-11-11 16:20:00', 'TARDE', 10.18, 5.04),
-  (54, 5, '2026-11-11 16:25:00', 'TARDE', 6.83, 5.18),
-  (55, 6, '2026-11-11 16:30:00', 'TARDE', 8.76, 5.14),
-  (56, 7, '2026-11-11 16:35:00', 'TARDE', 8.36, 4.63),
-  (57, 1, '2026-11-12 06:05:00', 'MANHA', 12.00, 4.70),
-  (58, 2, '2026-11-12 06:10:00', 'MANHA', 11.00, 5.21),
-  (59, 3, '2026-11-12 06:15:00', 'MANHA', 11.26, 4.94),
-  (60, 4, '2026-11-12 06:20:00', 'MANHA', 13.13, 4.90),
-  (61, 5, '2026-11-12 06:25:00', 'MANHA', 9.32, 5.21),
-  (62, 6, '2026-11-12 06:30:00', 'MANHA', 11.33, 5.01),
-  (63, 7, '2026-11-12 06:35:00', 'MANHA', 9.40, 4.65),
-  (64, 1, '2026-11-12 16:05:00', 'TARDE', 9.14, 4.93),
-  (65, 2, '2026-11-12 16:10:00', 'TARDE', 8.76, 5.20),
-  (66, 3, '2026-11-12 16:15:00', 'TARDE', 9.02, 4.77),
-  (67, 4, '2026-11-12 16:20:00', 'TARDE', 10.76, 5.13),
-  (68, 5, '2026-11-12 16:25:00', 'TARDE', 6.80, 5.20),
-  (69, 6, '2026-11-12 16:30:00', 'TARDE', 8.39, 5.08),
-  (70, 7, '2026-11-12 16:35:00', 'TARDE', 8.26, 4.59),
-  (71, 1, '2026-11-13 06:05:00', 'MANHA', 11.97, 4.81),
-  (72, 2, '2026-11-13 06:10:00', 'MANHA', 10.22, 5.21),
-  (73, 3, '2026-11-13 06:15:00', 'MANHA', 11.41, 4.81),
-  (74, 4, '2026-11-13 06:20:00', 'MANHA', 13.05, 5.07),
-  (75, 5, '2026-11-13 06:25:00', 'MANHA', 8.64, 5.14),
-  (76, 6, '2026-11-13 06:30:00', 'MANHA', 11.59, 5.04),
-  (77, 7, '2026-11-13 06:35:00', 'MANHA', 9.93, 4.71),
-  (78, 1, '2026-11-13 16:05:00', 'TARDE', 9.24, 4.72),
-  (79, 2, '2026-11-13 16:10:00', 'TARDE', 8.24, 5.13),
-  (80, 3, '2026-11-13 16:15:00', 'TARDE', 8.94, 4.82),
-  (81, 4, '2026-11-13 16:20:00', 'TARDE', 9.99, 5.04),
-  (82, 5, '2026-11-13 16:25:00', 'TARDE', 6.94, 5.32),
-  (83, 6, '2026-11-13 16:30:00', 'TARDE', 9.15, 4.87),
-  (84, 7, '2026-11-13 16:35:00', 'TARDE', 7.75, 4.75),
-  (85, 1, '2026-11-14 06:05:00', 'MANHA', 11.66, 4.69),
-  (86, 2, '2026-11-14 06:10:00', 'MANHA', 11.02, 5.12),
-  (87, 3, '2026-11-14 06:15:00', 'MANHA', 11.47, 4.99),
-  (88, 4, '2026-11-14 06:20:00', 'MANHA', 13.37, 4.91),
-  (89, 5, '2026-11-14 06:25:00', 'MANHA', 8.52, 5.18),
-  (90, 6, '2026-11-14 06:30:00', 'MANHA', 10.91, 4.99),
-  (91, 7, '2026-11-14 06:35:00', 'MANHA', 10.27, 4.75),
-  (92, 1, '2026-11-14 16:05:00', 'TARDE', 10.06, 4.68),
-  (93, 2, '2026-11-14 16:10:00', 'TARDE', 8.31, 5.05),
-  (94, 3, '2026-11-14 16:15:00', 'TARDE', 9.55, 4.82),
-  (95, 4, '2026-11-14 16:20:00', 'TARDE', 10.10, 4.98),
-  (96, 5, '2026-11-14 16:25:00', 'TARDE', 7.13, 5.13),
-  (97, 6, '2026-11-14 16:30:00', 'TARDE', 8.56, 5.13),
-  (98, 7, '2026-11-14 16:35:00', 'TARDE', 7.95, 4.81),
-  (99, 1, '2026-11-15 06:05:00', 'MANHA', 12.06, 4.67),
-  (100, 2, '2026-11-15 06:10:00', 'MANHA', 11.10, 5.20),
-  (101, 3, '2026-11-15 06:15:00', 'MANHA', 12.06, 5.03),
-  (102, 4, '2026-11-15 06:20:00', 'MANHA', 13.42, 4.90),
-  (103, 5, '2026-11-15 06:25:00', 'MANHA', 8.98, 5.11),
-  (104, 6, '2026-11-15 06:30:00', 'MANHA', 10.88, 4.87),
-  (105, 7, '2026-11-15 06:35:00', 'MANHA', 9.85, 4.85),
-  (106, 1, '2026-11-15 16:05:00', 'TARDE', 9.37, 4.89),
-  (107, 2, '2026-11-15 16:10:00', 'TARDE', 8.36, 5.08),
-  (108, 3, '2026-11-15 16:15:00', 'TARDE', 9.64, 5.05),
-  (109, 4, '2026-11-15 16:20:00', 'TARDE', 10.45, 5.07),
-  (110, 5, '2026-11-15 16:25:00', 'TARDE', 6.87, 5.14),
-  (111, 6, '2026-11-15 16:30:00', 'TARDE', 9.25, 5.02),
-  (112, 7, '2026-11-15 16:35:00', 'TARDE', 8.04, 4.77),
-  (113, 1, '2026-11-16 06:05:00', 'MANHA', 11.47, 4.83),
-  (114, 2, '2026-11-16 06:10:00', 'MANHA', 10.50, 5.21),
-  (115, 3, '2026-11-16 06:15:00', 'MANHA', 11.09, 5.99),
-  (116, 4, '2026-11-16 06:20:00', 'MANHA', 8.56, 5.03),
-  (117, 5, '2026-11-16 06:25:00', 'MANHA', 8.68, 5.09),
-  (118, 6, '2026-11-16 06:30:00', 'MANHA', 11.47, 4.92),
-  (119, 7, '2026-11-16 06:35:00', 'MANHA', 10.11, 4.74),
-  (120, 1, '2026-11-16 16:05:00', 'TARDE', 9.52, 4.83),
-  (121, 2, '2026-11-16 16:10:00', 'TARDE', 8.42, 5.23),
-  (122, 3, '2026-11-16 16:15:00', 'TARDE', 8.92, 6.00),
-  (123, 4, '2026-11-16 16:20:00', 'TARDE', 6.66, 5.05),
-  (124, 5, '2026-11-16 16:25:00', 'TARDE', 7.02, 5.28),
-  (125, 6, '2026-11-16 16:30:00', 'TARDE', 8.39, 4.99),
-  (126, 7, '2026-11-16 16:35:00', 'TARDE', 8.48, 4.85),
-  (127, 1, '2026-11-17 06:05:00', 'MANHA', 11.49, 4.71),
-  (128, 2, '2026-11-17 06:10:00', 'MANHA', 10.22, 5.23),
-  (129, 3, '2026-11-17 06:15:00', 'MANHA', 11.96, 6.31),
-  (130, 4, '2026-11-17 06:20:00', 'MANHA', 8.57, 5.10),
-  (131, 5, '2026-11-17 06:25:00', 'MANHA', 9.13, 5.35),
-  (132, 6, '2026-11-17 06:30:00', 'MANHA', 11.18, 4.85),
-  (133, 7, '2026-11-17 06:35:00', 'MANHA', 10.38, 4.64),
-  (134, 1, '2026-11-17 16:05:00', 'TARDE', 9.76, 4.93),
-  (135, 2, '2026-11-17 16:10:00', 'TARDE', 8.05, 4.98),
-  (136, 3, '2026-11-17 16:15:00', 'TARDE', 8.82, 6.30),
-  (137, 4, '2026-11-17 16:20:00', 'TARDE', 6.62, 5.07),
-  (138, 5, '2026-11-17 16:25:00', 'TARDE', 7.33, 5.13),
-  (139, 6, '2026-11-17 16:30:00', 'TARDE', 8.79, 5.12),
-  (140, 7, '2026-11-17 16:35:00', 'TARDE', 8.33, 4.58);
+-- TRATAMENTO
+INSERT INTO tratamento (id, vaca_id, medicamento, data_inicio, data_fim, dias_carencia, observacao) VALUES (1, 6, 'Anti-inflamatório', CURDATE() - INTERVAL 48 DAY, CURDATE() - INTERVAL 46 DAY, 2, 'Tratamento anterior, já liberado. Dados fictícios.');
+INSERT INTO tratamento (id, vaca_id, medicamento, data_inicio, data_fim, dias_carencia, observacao) VALUES (2, 6, 'Cefalexina intramamária', CURDATE() - INTERVAL 6 DAY, CURDATE() - INTERVAL 2 DAY, 4, 'Quarto posterior esquerdo, após alerta do sistema e teste da caneca. Dados fictícios.');
 
-INSERT INTO alerta (vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES
-  (6, 104, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-15 06:30:00', TRUE),
-  (6, 111, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-15 16:30:00', TRUE),
-  (3, 115, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', '2026-11-16 06:15:00', FALSE),
-  (6, 118, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-16 06:30:00', TRUE),
-  (3, 122, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', '2026-11-16 16:15:00', FALSE),
-  (6, 125, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-16 16:30:00', TRUE),
-  (3, 129, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', '2026-11-17 06:15:00', FALSE),
-  (4, 130, 'QUEDA_PRODUCAO', 'Produção em queda', '2026-11-17 06:20:00', FALSE),
-  (6, 132, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-17 06:30:00', FALSE),
-  (3, 136, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', '2026-11-17 16:15:00', FALSE),
-  (6, 139, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', '2026-11-17 16:30:00', FALSE);
+-- ORDENHA (140 leituras: 7 vacas em lactação x 10 dias x 2 turnos)
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (1, 1, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:00:00'), 'MANHA', 8.2, 0.429);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (2, 2, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:04:00'), 'MANHA', 9.0, 0.399);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (3, 3, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:08:00'), 'MANHA', 7.0, 0.435);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (4, 4, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:12:00'), 'MANHA', 8.2, 0.382);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (5, 5, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:16:00'), 'MANHA', 6.4, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (6, 6, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:20:00'), 'MANHA', 10.0, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (7, 7, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '06:24:00'), 'MANHA', 7.4, 0.368);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (8, 1, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:30:00'), 'TARDE', 7.1, 0.435);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (9, 2, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:34:00'), 'TARDE', 8.8, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (10, 3, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:38:00'), 'TARDE', 5.8, 0.437);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (11, 4, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:42:00'), 'TARDE', 7.4, 0.377);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (12, 5, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:46:00'), 'TARDE', 5.7, 0.417);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (13, 6, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:50:00'), 'TARDE', 9.5, 0.437);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (14, 7, TIMESTAMP(CURDATE() - INTERVAL 10 DAY, '16:54:00'), 'TARDE', 6.8, 0.344);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (15, 1, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:00:00'), 'MANHA', 7.9, 0.419);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (16, 2, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:04:00'), 'MANHA', 9.3, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (17, 3, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:08:00'), 'MANHA', 6.8, 0.441);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (18, 4, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:12:00'), 'MANHA', 8.8, 0.379);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (19, 5, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:16:00'), 'MANHA', 6.3, 0.409);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (20, 6, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:20:00'), 'MANHA', 10.0, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (21, 7, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '06:24:00'), 'MANHA', 7.2, 0.384);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (22, 1, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:30:00'), 'TARDE', 6.8, 0.413);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (23, 2, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:34:00'), 'TARDE', 8.7, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (24, 3, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:38:00'), 'TARDE', 6.1, 0.415);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (25, 4, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:42:00'), 'TARDE', 7.0, 0.392);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (26, 5, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:46:00'), 'TARDE', 5.6, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (27, 6, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:50:00'), 'TARDE', 9.2, 0.435);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (28, 7, TIMESTAMP(CURDATE() - INTERVAL 9 DAY, '16:54:00'), 'TARDE', 6.5, 0.381);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (29, 1, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:00:00'), 'MANHA', 8.0, 0.425);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (30, 2, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:04:00'), 'MANHA', 10.0, 0.405);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (31, 3, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:08:00'), 'MANHA', 7.0, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (32, 4, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:12:00'), 'MANHA', 8.3, 0.382);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (33, 5, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:16:00'), 'MANHA', 6.2, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (34, 6, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:20:00'), 'MANHA', 10.4, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (35, 7, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '06:24:00'), 'MANHA', 7.2, 0.382);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (36, 1, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:30:00'), 'TARDE', 7.6, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (37, 2, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:34:00'), 'TARDE', 8.1, 0.396);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (38, 3, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:38:00'), 'TARDE', 6.0, 0.423);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (39, 4, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:42:00'), 'TARDE', 7.6, 0.379);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (40, 5, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:46:00'), 'TARDE', 5.3, 0.413);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (41, 6, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:50:00'), 'TARDE', 8.0, 0.614);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (42, 7, TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:54:00'), 'TARDE', 6.6, 0.382);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (43, 1, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:00:00'), 'MANHA', 7.8, 0.409);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (44, 2, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:04:00'), 'MANHA', 9.2, 0.403);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (45, 3, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:08:00'), 'MANHA', 6.4, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (46, 4, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:12:00'), 'MANHA', 8.5, 0.401);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (47, 5, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:16:00'), 'MANHA', 6.0, 0.409);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (48, 6, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:20:00'), 'MANHA', 9.0, 0.606);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (49, 7, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:24:00'), 'MANHA', 7.8, 0.369);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (50, 1, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:30:00'), 'TARDE', 6.9, 0.441);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (51, 2, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:34:00'), 'TARDE', 8.8, 0.409);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (52, 3, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:38:00'), 'TARDE', 6.2, 0.417);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (53, 4, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:42:00'), 'TARDE', 7.0, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (54, 5, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:46:00'), 'TARDE', 6.0, 0.405);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (55, 6, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:50:00'), 'TARDE', 7.6, 0.639);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (56, 7, TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:54:00'), 'TARDE', 6.6, 0.392);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (57, 1, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:00:00'), 'MANHA', 8.3, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (58, 2, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:04:00'), 'MANHA', 9.3, 0.405);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (59, 3, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:08:00'), 'MANHA', 6.9, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (60, 4, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:12:00'), 'MANHA', 8.0, 0.379);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (61, 5, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:16:00'), 'MANHA', 6.7, 0.419);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (62, 6, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:20:00'), 'MANHA', 8.9, 0.538);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (63, 7, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:24:00'), 'MANHA', 7.4, 0.357);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (64, 1, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:30:00'), 'TARDE', 6.9, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (65, 2, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:34:00'), 'TARDE', 8.6, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (66, 3, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:38:00'), 'TARDE', 5.8, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (67, 4, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:42:00'), 'TARDE', 7.8, 0.386);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (68, 5, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:46:00'), 'TARDE', 5.6, 0.405);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (69, 6, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:50:00'), 'TARDE', 8.3, 0.500);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (70, 7, TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:54:00'), 'TARDE', 7.0, 0.375);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (71, 1, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:00:00'), 'MANHA', 7.8, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (72, 2, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:04:00'), 'MANHA', 9.2, 0.379);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (73, 3, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:08:00'), 'MANHA', 7.0, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (74, 4, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:12:00'), 'MANHA', 8.4, 0.399);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (75, 5, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:16:00'), 'MANHA', 6.4, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (76, 6, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:20:00'), 'MANHA', 9.6, 0.464);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (77, 7, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:24:00'), 'MANHA', 7.8, 0.392);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (78, 1, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:30:00'), 'TARDE', 7.2, 0.423);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (79, 2, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:34:00'), 'TARDE', 8.2, 0.413);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (80, 3, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:38:00'), 'TARDE', 6.3, 0.433);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (81, 4, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:42:00'), 'TARDE', 7.4, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (82, 5, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:46:00'), 'TARDE', 5.6, 0.415);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (83, 6, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:50:00'), 'TARDE', 9.0, 0.445);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (84, 7, TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:54:00'), 'TARDE', 6.6, 0.375);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (85, 1, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:00:00'), 'MANHA', 7.7, 0.419);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (86, 2, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:04:00'), 'MANHA', 9.3, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (87, 3, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:08:00'), 'MANHA', 6.9, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (88, 4, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:12:00'), 'MANHA', 8.3, 0.394);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (89, 5, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:16:00'), 'MANHA', 6.4, 0.409);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (90, 6, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:20:00'), 'MANHA', 9.5, 0.435);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (91, 7, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:24:00'), 'MANHA', 7.1, 0.470);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (92, 1, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:30:00'), 'TARDE', 7.2, 0.435);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (93, 2, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:34:00'), 'TARDE', 8.6, 0.396);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (94, 3, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:38:00'), 'TARDE', 5.8, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (95, 4, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:42:00'), 'TARDE', 7.0, 0.388);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (96, 5, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:46:00'), 'TARDE', 5.8, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (97, 6, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:50:00'), 'TARDE', 8.7, 0.447);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (98, 7, TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:54:00'), 'TARDE', 6.5, 0.382);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (99, 1, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:00:00'), 'MANHA', 7.9, 0.429);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (100, 2, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:04:00'), 'MANHA', 9.5, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (101, 3, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:08:00'), 'MANHA', 6.7, 0.441);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (102, 4, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:12:00'), 'MANHA', 8.3, 0.392);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (103, 5, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:16:00'), 'MANHA', 6.3, 0.411);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (104, 6, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:20:00'), 'MANHA', 10.2, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (105, 7, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:24:00'), 'MANHA', 7.6, 0.364);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (106, 1, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:30:00'), 'TARDE', 7.1, 0.445);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (107, 2, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:34:00'), 'TARDE', 8.7, 0.390);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (108, 3, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:38:00'), 'TARDE', 5.5, 0.485);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (109, 4, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:42:00'), 'TARDE', 7.7, 0.379);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (110, 5, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:46:00'), 'TARDE', 5.8, 0.407);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (111, 6, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:50:00'), 'TARDE', 9.1, 0.451);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (112, 7, TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:54:00'), 'TARDE', 6.4, 0.375);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (113, 1, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:00:00'), 'MANHA', 8.2, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (114, 2, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:04:00'), 'MANHA', 9.2, 0.396);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (115, 3, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:08:00'), 'MANHA', 6.4, 0.536);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (116, 4, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:12:00'), 'MANHA', 6.2, 0.403);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (117, 5, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:16:00'), 'MANHA', 6.5, 0.415);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (118, 6, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:20:00'), 'MANHA', 10.2, 0.439);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (119, 7, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:24:00'), 'MANHA', 7.3, 0.366);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (120, 1, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:30:00'), 'TARDE', 7.0, 0.413);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (121, 2, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:34:00'), 'TARDE', 8.3, 0.392);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (122, 3, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:38:00'), 'TARDE', 5.4, 0.576);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (123, 4, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:42:00'), 'TARDE', 5.4, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (124, 5, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:46:00'), 'TARDE', 5.6, 0.413);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (125, 6, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:50:00'), 'TARDE', 8.4, 0.453);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (126, 7, TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:54:00'), 'TARDE', 6.6, 0.369);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (127, 1, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:00:00'), 'MANHA', 8.1, 0.421);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (128, 2, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:04:00'), 'MANHA', 9.7, 0.401);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (129, 3, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:08:00'), 'MANHA', 6.0, 0.555);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (130, 4, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:12:00'), 'MANHA', 6.2, 0.386);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (131, 5, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:16:00'), 'MANHA', 6.4, 0.396);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (132, 6, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:20:00'), 'MANHA', 9.8, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (133, 7, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:24:00'), 'MANHA', 7.6, 0.377);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (134, 1, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:30:00'), 'TARDE', 7.1, 0.431);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (135, 2, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:34:00'), 'TARDE', 9.0, 0.398);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (136, 3, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:38:00'), 'TARDE', 5.2, 0.567);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (137, 4, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:42:00'), 'TARDE', 5.1, 0.369);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (138, 5, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:46:00'), 'TARDE', 5.3, 0.427);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (139, 6, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:50:00'), 'TARDE', 8.7, 0.453);
+INSERT INTO ordenha (id, vaca_id, data_hora, turno, litros, condutividade) VALUES (140, 7, TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:54:00'), 'TARDE', 6.5, 0.381);
+
+-- ALERTA (resolvido: 0 = aberto, 1 = resolvido pelo produtor)
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (1, 6, 41, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 8 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (2, 6, 48, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (3, 6, 55, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 7 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (4, 6, 62, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (5, 6, 69, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 6 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (6, 6, 76, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (7, 6, 83, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 5 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (8, 6, 90, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (9, 7, 91, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '06:24:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (10, 6, 97, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 4 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (11, 6, 104, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (12, 6, 111, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 3 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (13, 3, 115, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:08:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (14, 6, 118, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '06:20:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (15, 3, 122, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:38:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (16, 6, 125, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 2 DAY, '16:50:00'), 1);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (17, 3, 129, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:08:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (18, 4, 130, 'QUEDA_PRODUCAO', 'Produção em queda', TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:12:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (19, 6, 132, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '06:20:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (20, 3, 136, 'SUSPEITA_MASTITE', 'Suspeita de mastite: faça o teste da caneca ou o CMT', TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:38:00'), 0);
+INSERT INTO alerta (id, vaca_id, ordenha_id, tipo, mensagem, data_hora, resolvido) VALUES (21, 6, 139, 'LEITE_EM_CARENCIA', 'Não enviar este leite ao tanque', TIMESTAMP(CURDATE() - INTERVAL 1 DAY, '16:50:00'), 0);
+
+COMMIT;
+
+-- Os IDs acima foram informados à mão. No MySQL, o AUTO_INCREMENT de cada
+-- tabela passa sozinho para o maior ID + 1, então o próximo INSERT feito
+-- pela API (sem id) não colide com a carga. Conferência:
+SELECT 'usuario' AS tabela, COUNT(*) AS linhas FROM usuario
+UNION ALL SELECT 'propriedade', COUNT(*) FROM propriedade
+UNION ALL SELECT 'vaca', COUNT(*) FROM vaca
+UNION ALL SELECT 'tratamento', COUNT(*) FROM tratamento
+UNION ALL SELECT 'ordenha', COUNT(*) FROM ordenha
+UNION ALL SELECT 'alerta', COUNT(*) FROM alerta;

@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "propriedadeId": 1,
+    "brinco": "BR-001",
+    "nome": "Bonita",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 7.5,
+      "condutividadeBaseMs": 0.42,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 2,
+    "propriedadeId": 1,
+    "brinco": "BR-002",
+    "nome": "Malhada",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 9.0,
+      "condutividadeBaseMs": 0.4,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 3,
+    "propriedadeId": 1,
+    "brinco": "BR-003",
+    "nome": "Mimosa",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 6.5,
+      "condutividadeBaseMs": 0.43,
+      "fatorLitrosAtual": 0.87,
+      "fatorCondutividadeAtual": 1.38
+    }
+  },
+  {
+    "id": 4,
+    "propriedadeId": 1,
+    "brinco": "BR-004",
+    "nome": "Estrela",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 8.0,
+      "condutividadeBaseMs": 0.39,
+      "fatorLitrosAtual": 0.7,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 5,
+    "propriedadeId": 1,
+    "brinco": "BR-005",
+    "nome": "Princesa",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 6.0,
+      "condutividadeBaseMs": 0.41,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 6,
+    "propriedadeId": 2,
+    "brinco": "SL-010",
+    "nome": "Pintada",
+    "status": "EM_TRATAMENTO",
+    "perfil": {
+      "litrosBase": 9.5,
+      "condutividadeBaseMs": 0.44,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 7,
+    "propriedadeId": 2,
+    "brinco": "SL-011",
+    "nome": "Faceira",
+    "status": "ATIVA",
+    "perfil": {
+      "litrosBase": 7.0,
+      "condutividadeBaseMs": 0.38,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  },
+  {
+    "id": 8,
+    "propriedadeId": 2,
+    "brinco": "SL-012",
+    "nome": "Serena",
+    "status": "SECA",
+    "perfil": {
+      "litrosBase": 0,
+      "condutividadeBaseMs": 0.4,
+      "fatorLitrosAtual": 1.0,
+      "fatorCondutividadeAtual": 1.0
+    }
+  }
+]
