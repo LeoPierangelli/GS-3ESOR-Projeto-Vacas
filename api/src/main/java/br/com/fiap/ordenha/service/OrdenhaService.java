@@ -4,6 +4,7 @@ import br.com.fiap.ordenha.dto.AlertaResponse;
 import br.com.fiap.ordenha.dto.OrdenhaRegistradaResponse;
 import br.com.fiap.ordenha.dto.OrdenhaRequest;
 import br.com.fiap.ordenha.dto.OrdenhaResponse;
+import br.com.fiap.ordenha.exception.ConflitoException;
 import br.com.fiap.ordenha.model.*;
 import br.com.fiap.ordenha.repository.AlertaRepository;
 import br.com.fiap.ordenha.repository.OrdenhaRepository;
@@ -39,6 +40,9 @@ public class OrdenhaService {
     @Transactional
     public OrdenhaRegistradaResponse registrar(OrdenhaRequest req, Long usuarioId) {
         Vaca vaca = vacaService.buscarDoUsuario(req.vacaId(), usuarioId);
+        if (ordenhaRepository.existsByVacaIdAndDataHora(vaca.getId(), req.dataHora())) {
+            throw new ConflitoException("Já existe uma ordenha da vaca " + vaca.getId() + " em " + req.dataHora());
+        }
 
         // Histórico ANTES desta leitura, da mais recente para a mais antiga.
         List<Ordenha> historico = ordenhaRepository.findByVacaIdAndDataHoraBeforeOrderByDataHoraDesc(
