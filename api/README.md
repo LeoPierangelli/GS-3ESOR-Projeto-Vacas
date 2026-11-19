@@ -24,7 +24,7 @@ Esta é a API da Ordenha Monitorada (Global Solution 2026/2, CitizenTech). Ela r
 
 Todos os comandos abaixo rodam dentro da pasta `api/`.
 
-**1. Subir o banco.** Na primeira vez, o MySQL cria as tabelas e a carga inicial com os scripts da pasta `db/`:
+**1. Subir o banco.** Na primeira vez, o MySQL cria as tabelas e a carga inicial com os scripts da pasta `banco/`:
 
 ```bash
 docker compose up -d
@@ -119,7 +119,7 @@ Exemplo de leitura enviada pelos sensores (`POST /ordenhas`):
 }
 ```
 
-- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`compartilhado/REGRAS.md`](../compartilhado/REGRAS.md).
+- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`docs/REGRAS.md`](../docs/REGRAS.md).
 - **`dataHora`:** use o momento atual ou um horário recente. Data futura responde 400, e a mesma vaca no mesmo horário de uma leitura que já existe responde 409.
 - **Resposta:** traz a ordenha gravada e a lista `alertasGerados`, que vem vazia quando nenhuma regra dispara. No exemplo acima, a Malhada (média em torno de 0,400 mS) gera `SUSPEITA_MASTITE`.
 
@@ -172,7 +172,7 @@ O token de login é um valor aleatório de 256 bits (`SecureRandom`) guardado em
 
 ## Banco de dados
 
-Os scripts da pasta `db/` são **cópias** do banco oficial, que fica em [`banco/`](../banco/README.md) com o diagrama ER e as consultas. As cópias são geradas por `ferramentas/gerar_dados.py`: não edite à mão. O Docker roda os scripts em ordem alfabética na primeira subida. Depois de atualizar o repositório, recrie o banco com `docker compose down -v` e depois `docker compose up -d`.
+O Docker da API roda os scripts oficiais da pasta [`banco/`](../banco/README.md) (`01_criar_tabelas.sql` e `02_carga_inicial.sql`), onde também estão o diagrama ER e as consultas. Não há cópia dos scripts dentro de `api/`. Depois de atualizar o repositório, recrie o banco com `docker compose down -v` e depois `docker compose up -d`.
 
 As datas da carga são relativas ao dia em que o banco é criado (os 10 dias anteriores). Por isso os alertas e a carência fazem sentido em qualquer dia.
 

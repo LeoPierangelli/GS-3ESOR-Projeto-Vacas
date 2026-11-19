@@ -6,7 +6,7 @@
 -- botão do raio "Execute" (Ctrl+Shift+Enter), que executa o script inteiro.
 -- Pode ser executado várias vezes: o banco ordenha é criado se não
 -- existir, e as 6 tabelas são apagadas e recriadas.
--- É o mesmo script que o Docker da API usa (cópia em api/db/01-schema.sql).
+-- É o mesmo script que o Docker da API usa (api/docker-compose.yml lê este arquivo).
 -- O banco se chama ordenha, o mesmo nome que a API usa (application.properties).
 -- Se você não tiver permissão para criar banco, apague as linhas
 -- CREATE DATABASE e USE e selecione antes o banco que for usar.

@@ -5,7 +5,7 @@ O banco oficial (`banco/`) foi feito para encaixar na API **sem mudar nenhuma li
 
 ## 1. Banco oficial × banco provisório da API
 
-O `docker-compose.yml` da API roda os scripts de `api/db/`. Esses arquivos agora são **cópias** de `banco/01_criar_tabelas.sql` e `banco/02_carga_inicial.sql`, geradas por `ferramentas/gerar_dados.py`.
+O `docker-compose.yml` da API roda direto `banco/01_criar_tabelas.sql` e `banco/02_carga_inicial.sql` (não há cópia na pasta da API). A carga é gerada por `banco/gerar_dados.py`.
 Para usar o banco oficial com a API, recrie o banco do Docker uma vez, dentro de `api/`:
 
 ```bash

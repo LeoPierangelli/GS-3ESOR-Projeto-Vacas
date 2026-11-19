@@ -1,7 +1,7 @@
 -- =============================================================================
 -- ORDENHA MONITORADA · Parte 1 (Banco de dados)
 -- Script 02 de 03: carga inicial. Rode DEPOIS do 01_criar_tabelas.sql.
--- ARQUIVO GERADO por ferramentas/gerar_dados.py; não edite à mão.
+-- ARQUIVO GERADO por banco/gerar_dados.py; não edite à mão.
 --
 -- As datas são relativas ao dia da execução: a carga cobre os 10 dias
 -- anteriores a hoje (CURDATE() - 10 dias até CURDATE() - 1 dia).

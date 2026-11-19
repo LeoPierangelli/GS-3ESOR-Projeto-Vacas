@@ -1,13 +1,14 @@
 # Ordenha Monitorada: Banco de dados (MySQL)
 
 Modelo oficial do banco: 6 tabelas, carga inicial e 6 consultas de uso real.
-É o mesmo banco que a API usa: `api/db/` tem uma cópia destes scripts, e o Docker da API os roda na primeira subida.
+É o mesmo banco que a API usa: o Docker da API (`api/docker-compose.yml`) roda o `01` e o `02` desta pasta na primeira subida.
 
 | Arquivo | O que é |
 |---|---|
 | `01_criar_tabelas.sql` | cria o banco `ordenha` e as 6 tabelas, com PK, FK, UNIQUE, CHECK, índices e comentários |
-| `02_carga_inicial.sql` | carga inicial (gerada por `ferramentas/gerar_dados.py`; não edite à mão) |
+| `02_carga_inicial.sql` | carga inicial (gerada por `gerar_dados.py`; não edite à mão) |
 | `03_consultas.sql` | 6 consultas com JOIN e agregação |
+| `gerar_dados.py` | gera a carga inicial, o mock do app (`mobile/mock_app.json`) e os dados do simulador (`iot/dados/`) a partir de uma única definição do rebanho. Rode na raiz do repositório: `python banco/gerar_dados.py` |
 | `diagrama_er.png` | diagrama entidade-relacionamento (fonte: `diagrama_er.dot`) |
 
 ## Como rodar (MySQL 8.0.16 ou superior)
@@ -44,4 +45,4 @@ docker compose up -d
 - **Exclusão em cascata.** Ordenhas, alertas e tratamentos caem junto com a vaca, então `DELETE /vacas/{id}` funciona.
 - **Condutividade em mS**, na escala do protótipo MastitAlert (vaca sadia com cerca de 0,4 a 0,5 mS).
 
-O contrato completo (regras, casos de teste e roteiro das vacas) está em [`compartilhado/REGRAS.md`](../compartilhado/REGRAS.md).
+O contrato completo (regras, casos de teste e roteiro das vacas) está em [`docs/REGRAS.md`](../docs/REGRAS.md).
