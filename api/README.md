@@ -58,7 +58,7 @@ Para usar o Swagger:
 | `joao@exemplo.com` | `senha123` | Sítio Boa Vista (id 1) | 1 a 5 |
 | `maria@exemplo.com` | `senha123` | Fazendinha Santa Luzia (id 2) | 6 a 8 |
 
-A carga inicial já tem os casos que aparecem no app e no vídeo:
+A carga inicial (o banco oficial de [`banco/`](../banco/README.md), com datas dos 10 dias anteriores à criação do banco) já tem os casos que aparecem no app e no vídeo:
 - **Vaca 3 (Mimosa):** condutividade subindo, com alertas de suspeita de mastite.
 - **Vaca 4 (Estrela):** produção em queda.
 - **Vaca 6 (Pintada):** em tratamento, com o leite em carência.
@@ -101,7 +101,7 @@ Todas as rotas fora de `/auth` exigem o cabeçalho `Authorization: Bearer <token
 | POST | `/vacas` | Cadastra vaca | 201 | 400, 404, 409 |
 | PUT | `/vacas/{id}` | Atualiza vaca | 200 | 400, 404, 409 |
 | DELETE | `/vacas/{id}` | Remove vaca (e o histórico dela) | 204 | 401, 404 |
-| POST | `/ordenhas` | Recebe a leitura, grava e aplica as regras de alerta | 201 | 400, 404 |
+| POST | `/ordenhas` | Recebe a leitura, grava e aplica as regras de alerta | 201 | 400, 404, 409 |
 | GET | `/vacas/{id}/ordenhas` | Histórico de ordenhas da vaca | 200 | 401, 404 |
 | GET | `/alertas?resolvido=false` | Lista alertas (o filtro é opcional) | 200 | 401 |
 | PUT | `/alertas/{id}/resolver` | Marca o alerta como resolvido | 200 | 401, 404 |
@@ -111,19 +111,23 @@ Exemplo de leitura enviada pelos sensores (`POST /ordenhas`):
 
 ```json
 {
-  "vacaId": 3,
-  "dataHora": "2026-11-18T06:10:00",
+  "vacaId": 2,
+  "dataHora": "2026-11-19T06:10:00",
   "turno": "MANHA",
-  "litros": 11.4,
-  "condutividade": 6.8
+  "litros": 8.6,
+  "condutividade": 0.480
 }
 ```
 
-A resposta traz a ordenha gravada e a lista `alertasGerados`, que vem vazia quando nenhuma regra dispara.
+- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`compartilhado/REGRAS.md`](../compartilhado/REGRAS.md).
+- **`dataHora`:** use o momento atual ou um horário recente. Data futura responde 400, e a mesma vaca no mesmo horário de uma leitura que já existe responde 409.
+- **Resposta:** traz a ordenha gravada e a lista `alertasGerados`, que vem vazia quando nenhuma regra dispara. No exemplo acima, a Malhada (média em torno de 0,400 mS) gera `SUSPEITA_MASTITE`.
+
+O simulador de sensores da pasta [`iot/`](../iot/README.md) envia leituras para esta rota com `--api` e `--token`.
 
 **Documentação:**
 - O Swagger roda junto com a API.
-- A Postman Collection está em [`docs/ordenha-api.postman_collection.json`](docs/ordenha-api.postman_collection.json). Importe no Postman e rode *Auth > Login (João)* primeiro: o token é salvo sozinho.
+- A Postman Collection está em [`docs/ordenha-api.postman_collection.json`](docs/ordenha-api.postman_collection.json). Importe no Postman e rode *Auth > Login (João)* primeiro: o token é salvo sozinho. As ordenhas usam a variável `{{agora}}` (o horário do envio), então a coleção pode rodar várias vezes. Só o *Cadastro de usuário* volta 409 a partir da segunda vez, porque o email já existe.
 - A especificação OpenAPI exportada está em [`docs/openapi.json`](docs/openapi.json).
 
 ## Arquitetura em camadas
@@ -168,9 +172,9 @@ O token de login é um valor aleatório de 256 bits (`SecureRandom`) guardado em
 
 ## Banco de dados
 
-Os scripts da pasta `db/` são uma **versão provisória** para a API rodar sozinha. O modelo oficial (diagrama ER, script e consultas) é entregue na parte de banco de dados. Os nomes das tabelas e das colunas são os mesmos do planejamento: `usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`.
+Os scripts da pasta `db/` são **cópias** do banco oficial, que fica em [`banco/`](../banco/README.md) com o diagrama ER e as consultas. As cópias são geradas por `ferramentas/gerar_dados.py`: não edite à mão. O Docker roda os scripts em ordem alfabética na primeira subida. Depois de atualizar o repositório, recrie o banco com `docker compose down -v` e depois `docker compose up -d`.
 
-Para usar outro script `.sql`, troque os arquivos da pasta `db/`, que rodam em ordem alfabética, e recrie o banco com `docker compose down -v` e depois `docker compose up -d`.
+As datas da carga são relativas ao dia em que o banco é criado (os 10 dias anteriores). Por isso os alertas e a carência fazem sentido em qualquer dia.
 
 ## Créditos
 

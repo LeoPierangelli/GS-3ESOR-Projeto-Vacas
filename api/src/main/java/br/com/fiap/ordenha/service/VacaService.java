@@ -125,6 +125,6 @@ public class VacaService {
             return null;
         }
         double m = valores.stream().mapToDouble(Double::doubleValue).average().orElse(0);
-        return Math.round(m * 100) / 100.0;
+        return Math.round(m * 1000) / 1000.0; // 3 casas: a condutividade vem em mS com 3 decimais
     }
 }

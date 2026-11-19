@@ -26,6 +26,14 @@
     {
       "key": "vacaId",
       "value": ""
+    },
+    {
+      "key": "agora",
+      "value": ""
+    },
+    {
+      "key": "hoje",
+      "value": ""
     }
   ],
   "item": [
@@ -474,7 +482,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vacaId\": 1,\n  \"dataHora\": \"2026-11-18T06:05:00\",\n  \"turno\": \"MANHA\",\n  \"litros\": 12.1,\n  \"condutividade\": 4.8\n}"
+              "raw": "{\n  \"vacaId\": 2,\n  \"dataHora\": \"{{agora}}\",\n  \"turno\": \"MANHA\",\n  \"litros\": 9.0,\n  \"condutividade\": 0.402\n}"
             }
           },
           "event": [
@@ -483,7 +491,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('status 201', () => pm.response.to.have.status(201));"
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('nenhum alerta', () => pm.expect(pm.response.json().alertasGerados).to.have.lengthOf(0));"
                 ]
               }
             }
@@ -510,7 +519,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vacaId\": 2,\n  \"dataHora\": \"2026-11-18T06:10:00\",\n  \"turno\": \"MANHA\",\n  \"litros\": 10.4,\n  \"condutividade\": 6.2\n}"
+              "raw": "{\n  \"vacaId\": 2,\n  \"dataHora\": \"{{agora}}\",\n  \"turno\": \"MANHA\",\n  \"litros\": 8.6,\n  \"condutividade\": 0.48\n}"
             }
           },
           "event": [
@@ -519,7 +528,8 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('status 201', () => pm.response.to.have.status(201));"
+                  "pm.test('status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('gerou SUSPEITA_MASTITE', () => pm.expect(pm.response.json().alertasGerados.map(a => a.tipo)).to.include('SUSPEITA_MASTITE'));"
                 ]
               }
             }
@@ -546,7 +556,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vacaId\": 1,\n  \"dataHora\": \"2026-11-18T06:05:00\",\n  \"turno\": \"MANHA\",\n  \"litros\": -2,\n  \"condutividade\": 4.8\n}"
+              "raw": "{\n  \"vacaId\": 1,\n  \"dataHora\": \"{{agora}}\",\n  \"turno\": \"MANHA\",\n  \"litros\": -2,\n  \"condutividade\": 0.43\n}"
             }
           },
           "event": [
@@ -654,7 +664,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"vacaId\": 3,\n  \"medicamento\": \"Cefalexina intramamária\",\n  \"dataInicio\": \"2026-11-18\",\n  \"dataFim\": \"2026-11-21\",\n  \"diasCarencia\": 4,\n  \"observacao\": \"Quarto anterior direito\"\n}"
+              "raw": "{\n  \"vacaId\": 3,\n  \"medicamento\": \"Cefalexina intramamária\",\n  \"dataInicio\": \"{{hoje}}\",\n  \"diasCarencia\": 4,\n  \"observacao\": \"Quarto anterior direito\"\n}"
             }
           },
           "event": [
@@ -670,6 +680,21 @@
           ]
         }
       ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const d = new Date(Date.now() - 60000);",
+          "const p = n => String(n).padStart(2, '0');",
+          "const hoje = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;",
+          "pm.collectionVariables.set('hoje', hoje);",
+          "pm.collectionVariables.set('agora', `${hoje}T${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`);"
+        ]
+      }
     }
   ]
 }
