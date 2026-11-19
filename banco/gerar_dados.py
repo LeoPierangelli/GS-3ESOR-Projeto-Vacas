@@ -2,9 +2,7 @@
 Gera, a partir de UMA única definição do rebanho, todos os dados de exemplo:
 
   banco/02_carga_inicial.sql          INSERTs da carga inicial (MySQL)
-  api/db/01-schema.sql                cópia de banco/01_criar_tabelas.sql (usada pelo Docker da API)
-  api/db/02-carga-inicial.sql         cópia da carga (usada pelo Docker da API)
-  compartilhado/mock_app.json         mock do app (mesmo formato das tabelas)
+  mobile/mock_app.json                mock do app (mesmo formato das tabelas)
   iot/dados/rebanho.json              perfil de cada vaca, usado pelo simulador
   iot/dados/historico_inicial.json    histórico que o simulador usa como ponto de partida
 
@@ -19,7 +17,10 @@ continuarem valendo.
 As datas do .sql são relativas a CURDATE(): a carga cobre os 10 dias
 anteriores ao dia em que o script for executado.
 
-Uso (na raiz do repositório):  python ferramentas/gerar_dados.py
+Uso (na raiz do repositório):  python banco/gerar_dados.py
+
+O Docker da API lê os scripts direto desta pasta (api/docker-compose.yml),
+então não há cópia para manter em dia.
 Só usa a biblioteca padrão do Python. A semente é fixa.
 """
 from __future__ import annotations
@@ -211,7 +212,7 @@ def escrever_sql(ordenhas, alertas, caminho: Path, cabecalho_extra=""):
     w("-- =============================================================================")
     w("-- ORDENHA MONITORADA · Parte 1 (Banco de dados)")
     w("-- Script 02 de 03: carga inicial. Rode DEPOIS do 01_criar_tabelas.sql.")
-    w("-- ARQUIVO GERADO por ferramentas/gerar_dados.py; não edite à mão.")
+    w("-- ARQUIVO GERADO por banco/gerar_dados.py; não edite à mão.")
     if cabecalho_extra:
         w(cabecalho_extra)
     w("--")
@@ -368,31 +369,15 @@ def escrever_iot(ordenhas, alertas, dir_dados: Path):
         json.dumps(hist, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-def copiar_para_api():
-    """O docker-compose da API roda os scripts de api/db/ na primeira subida do MySQL."""
-    destino = RAIZ / "api" / "db"
-    if not destino.is_dir():
-        return False
-    aviso = ("-- CÓPIA de banco/{} feita por ferramentas/gerar_dados.py.\n"
-             "-- O original (e oficial) fica na pasta banco/. Não edite esta cópia.\n")
-    for origem, nome in [("01_criar_tabelas.sql", "01-schema.sql"),
-                         ("02_carga_inicial.sql", "02-carga-inicial.sql")]:
-        texto = (RAIZ / "banco" / origem).read_text(encoding="utf-8")
-        (destino / nome).write_text(aviso.format(origem) + texto, encoding="utf-8")
-    return True
-
-
 def main():
     hoje, ordenhas, alertas = gerar()
-    (RAIZ / "compartilhado").mkdir(exist_ok=True)
+    (RAIZ / "mobile").mkdir(exist_ok=True)
     (RAIZ / "iot" / "dados").mkdir(parents=True, exist_ok=True)
     escrever_sql(ordenhas, alertas, RAIZ / "banco" / "02_carga_inicial.sql")
-    escrever_mock(hoje, ordenhas, alertas, RAIZ / "compartilhado" / "mock_app.json")
+    escrever_mock(hoje, ordenhas, alertas, RAIZ / "mobile" / "mock_app.json")
     escrever_iot(ordenhas, alertas, RAIZ / "iot" / "dados")
-    copiado = copiar_para_api()
     print(f"OK: {len(ordenhas)} ordenhas, {len(alertas)} alertas "
-          f"({sum(1 for a in alertas if not a['resolvido'])} abertos)."
-          + (" Cópia atualizada em api/db/." if copiado else ""))
+          f"({sum(1 for a in alertas if not a['resolvido'])} abertos).")
     for a in alertas:
         o = a["ordenha"]
         print(f"  alerta {a['id']:>2}: vaca {a['vaca_id']} {a['tipo']:<18} dia {o['off']:>3} "
