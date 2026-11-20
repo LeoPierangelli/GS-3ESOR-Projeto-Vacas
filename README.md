@@ -39,8 +39,9 @@ O enunciado diz que as partes não precisam estar integradas: cada uma roda sozi
 | [`testes/`](testes/README.md) | 3 · Plano de testes e evidências | 2 | pronta |
 | [`mobile/`](mobile/README.md) | 4 · Front-end mobile | 3 | pronta |
 | [`iot/`](iot/README.md) | 6 · Simulação de IoT | 2 | pronta |
-| [`docs/`](docs/) | textos do PDF ([partes 1 e 6](docs/texto_pdf_parte1.md), [abertura, partes 2 a 5 e ODS](docs/texto_pdf_partes2a5.md)) e o contrato entre as partes | — | — |
-| [`integrantes.txt`](integrantes.txt) | o `.txt` da entrega: grupo, RM, nomes e link do pitch | — | a preencher |
+| [`docs/REGRAS.md`](docs/REGRAS.md) | o contrato entre as partes (ver abaixo) | — | — |
+| [`Ordenha_Monitorada.pdf`](Ordenha_Monitorada.pdf) | **o PDF da entrega**: os entregáveis de cada parte, com diagramas, plano de testes e evidências | — | falta o link do vídeo |
+| [`integrantes.txt`](integrantes.txt) | o `.txt` da entrega: grupo, RM, nomes e link do pitch | — | falta o link do vídeo |
 
 **O contrato entre as partes** está em [`docs/REGRAS.md`](docs/REGRAS.md): regras de alerta, usuários de teste, o papel de cada vaca da carga e os casos de teste. Os nomes de tabelas, campos e rotas são os mesmos em todas as partes: `usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`.
 
@@ -59,10 +60,10 @@ docker compose up -d
 
 Depois, abra o Swagger em http://localhost:8080/swagger-ui.html e faça login com `joao@exemplo.com` / `senha123`.
 
-**2. Simulador dos sensores enviando para a API.** Precisa de Python 3.8+. Dentro de `iot/`:
+**2. Simulador dos sensores enviando para a API.** Precisa de Python 3.8+ (no Linux e no WSL o comando é `python3`; no Windows, `python`). Dentro de `iot/`:
 
 ```bash
-python simulador_sensores.py --propriedade 1 --doente 1 --api http://localhost:8080 --token SEU_TOKEN
+python3 simulador_sensores.py --propriedade 1 --doente 1 --api http://localhost:8080 --token SEU_TOKEN
 ```
 
 **3. Plano de testes da API**, com a API rodando, na raiz do repositório. Ele grava as evidências em `testes/evidencias/`:
@@ -77,8 +78,12 @@ bash testes/executar_testes.sh
 ./mvnw test
 ```
 ```bash
-python -m unittest -v test_regras.py
+python3 -m unittest -v test_regras.py
 ```
+
+## Entrega
+
+O `.zip` da entrega tem o código com um README de execução por parte, o [PDF](Ordenha_Monitorada.pdf) com os entregáveis de cada parte e o [`integrantes.txt`](integrantes.txt), com o grupo, o RM e o nome de cada integrante e o link do vídeo.
 
 ## Vídeo pitch
 
@@ -87,7 +92,7 @@ Link: _a definir_ (público; testar numa aba anônima antes de entregar)
 ## Créditos
 
 - **Inspiração do sensor:** PORTUGAL, G.; GUEDES, G. *MastitAlert: towards detection of mastitis during the act of milking.* BreSci 2021, SBC. DOI 10.5753/bresci.2021.15800.
-- **Demais fontes:** em [`docs/texto_pdf_parte1.md`](docs/texto_pdf_parte1.md).
+- **Demais fontes:** na seção "Fontes e créditos" do [PDF](Ordenha_Monitorada.pdf).
 - **Dados:** todos os dados são fictícios ou simulados.
 
 ## Uso de IA generativa

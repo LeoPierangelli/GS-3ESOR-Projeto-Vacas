@@ -1,5 +1,5 @@
 Caso:      CT12 · Vaca de outro produtor
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   João pede GET /vacas/6
 Esperado:  404 (não revela que existe)
 Obtido:    404
@@ -9,4 +9,4 @@ Resultado: PASSOU
 GET /vacas/6
 
 --- Resposta (HTTP 404) ---
-{"status":404,"erro":"Not Found","mensagem":"Vaca 6 não encontrada","timestamp":"2026-11-20T18:13:22.927457384"}
+{"status":404,"erro":"Not Found","mensagem":"Vaca 6 não encontrada","timestamp":"2026-11-20T19:23:10.831787287"}

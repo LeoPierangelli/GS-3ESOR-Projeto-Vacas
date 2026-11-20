@@ -1,5 +1,5 @@
 Caso:      CT05 · Ordenha com litros negativos
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   litros = -2
 Esperado:  400, erro no campo litros
 Obtido:    400
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /ordenhas
-{"vacaId":2,"dataHora":"2026-11-20T18:11:52","turno":"MANHA","litros":-2,"condutividade":0.40}
+{"vacaId":2,"dataHora":"2026-11-20T19:21:40","turno":"MANHA","litros":-2,"condutividade":0.40}
 
 --- Resposta (HTTP 400) ---
-{"status":400,"erro":"Bad Request","mensagem":"Dados de entrada inválidos","campos":{"litros":"deve ser maior que zero"},"timestamp":"2026-11-20T18:13:22.690015573"}
+{"status":400,"erro":"Bad Request","mensagem":"Dados de entrada inválidos","campos":{"litros":"deve ser maior que zero"},"timestamp":"2026-11-20T19:23:10.608722618"}

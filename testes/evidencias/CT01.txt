@@ -1,5 +1,5 @@
 Caso:      CT01 · Cadastro de usuário válido
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   nome, email novo, senha válida
 Esperado:  201, sem senha nem hash na resposta
 Obtido:    201
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /auth/cadastro
-{"nome":"Teste Plano","email":"teste.1795209202@exemplo.com","senha":"senhaforte1","propriedade":{"nome":"Sítio Teste","municipio":"Lavras","uf":"MG"}}
+{"nome":"Teste Plano","email":"teste.1795213390@exemplo.com","senha":"senhaforte1","propriedade":{"nome":"Sítio Teste","municipio":"Lavras","uf":"MG"}}
 
 --- Resposta (HTTP 201) ---
-{"usuario":{"id":3,"nome":"Teste Plano","email":"teste.1795209202@exemplo.com"},"propriedade":{"id":3,"nome":"Sítio Teste","municipio":"Lavras","uf":"MG"}}
+{"usuario":{"id":3,"nome":"Teste Plano","email":"teste.1795213390@exemplo.com"},"propriedade":{"id":3,"nome":"Sítio Teste","municipio":"Lavras","uf":"MG"}}

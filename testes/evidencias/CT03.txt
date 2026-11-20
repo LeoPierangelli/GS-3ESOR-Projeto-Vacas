@@ -1,6 +1,6 @@
 Caso:      CT03 · Cadastro de vaca válido
-Executado: 20/11/2026 18:13:22
-Entrada:   brinco novo T-209202
+Executado: 20/11/2026 19:23:10
+Entrada:   brinco novo T-213390
 Esperado:  201 e aparece em GET /vacas
 Obtido:    201, id 9
 Resultado: PASSOU
@@ -9,4 +9,4 @@ Resultado: PASSOU
 GET /vacas
 
 --- Resposta (HTTP 201) ---
-{"id":9,"propriedadeId":1,"brinco":"T-209202","nome":"Vaca de teste","dataNascimento":"2023-05-01","status":"ATIVA","alertasAbertos":0}
+{"id":9,"propriedadeId":1,"brinco":"T-213390","nome":"Vaca de teste","dataNascimento":"2023-05-01","status":"ATIVA","alertasAbertos":0}

@@ -1,5 +1,5 @@
 Caso:      CT11 · Rota protegida sem token
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   GET /vacas sem Authorization
 Esperado:  401
 Obtido:    401
@@ -9,4 +9,4 @@ Resultado: PASSOU
 GET /vacas
 
 --- Resposta (HTTP 401) ---
-{"status":401,"erro":"Unauthorized","mensagem":"Faça login e envie o token no cabeçalho Authorization: Bearer <token>","timestamp":"2026-11-20T18:13:22.911368390"}
+{"status":401,"erro":"Unauthorized","mensagem":"Faça login e envie o token no cabeçalho Authorization: Bearer <token>","timestamp":"2026-11-20T19:23:10.815726468"}

@@ -1,6 +1,6 @@
 # Ordenha Monitorada: Plano de testes
 
-Parte 3 da entrega (2 pts). O plano tem **15 casos de teste da API**, 8 deles de erro, todos executados por script e com evidência salva. Além deles, há **37 testes automatizados de unidade** nas outras partes.
+Parte 3 da entrega (2 pts). O plano tem **15 casos de teste da API**, 9 deles de erro (4 de segurança), todos executados por script e com evidência salva. Além deles, há **37 testes automatizados de unidade** nas outras partes.
 
 | Arquivo | O que é |
 |---|---|
@@ -65,7 +65,7 @@ Eles rodam por comando e geram relatório, o que conta como diferencial.
 |---|---|---|---|
 | API | `cd api && ./mvnw test` | 7 (JUnit 5) | as 3 regras de alerta do `RegrasAlertaService` |
 | App mobile | `cd mobile && ./gradlew testDebugUnitTest` | 8 (JUnit 4) | os dados do app iguais à carga do banco, login por produtor, alertas seguindo as regras da API, brinco repetido |
-| Simulador de IoT | `cd iot && python -m unittest -v test_regras.py` | 22 (unittest) | as regras de alerta, as equações do sensor e o alarme do aparelho |
+| Simulador de IoT | `cd iot && python3 -m unittest -v test_regras.py` | 22 (unittest) | as regras de alerta, as equações do sensor e o alarme do aparelho |
 
 ## Outras formas de testar
 

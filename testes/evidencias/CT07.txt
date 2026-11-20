@@ -1,5 +1,5 @@
 Caso:      CT07 · Condutividade acima da média
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   BR-002, 0,480 mS (+20%)
 Esperado:  201 e alerta SUSPEITA_MASTITE
 Obtido:    201
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /ordenhas
-{"vacaId":2,"dataHora":"2026-11-20T18:12:12","turno":"MANHA","litros":8.8,"condutividade":0.480}
+{"vacaId":2,"dataHora":"2026-11-20T19:22:00","turno":"MANHA","litros":8.8,"condutividade":0.480}
 
 --- Resposta (HTTP 201) ---
-{"ordenha":{"id":142,"vacaId":2,"dataHora":"2026-11-20T18:12:12","turno":"MANHA","litros":8.8,"condutividade":0.48},"alertasGerados":[{"id":22,"vacaId":2,"brinco":"BR-002","nomeVaca":"Malhada","ordenhaId":142,"tipo":"SUSPEITA_MASTITE","mensagem":"Suspeita de mastite: faça o teste da caneca ou o CMT","dataHora":"2026-11-20T18:12:12","resolvido":false}]}
+{"ordenha":{"id":142,"vacaId":2,"dataHora":"2026-11-20T19:22:00","turno":"MANHA","litros":8.8,"condutividade":0.48},"alertasGerados":[{"id":22,"vacaId":2,"brinco":"BR-002","nomeVaca":"Malhada","ordenhaId":142,"tipo":"SUSPEITA_MASTITE","mensagem":"Suspeita de mastite: faça o teste da caneca ou o CMT","dataHora":"2026-11-20T19:22:00","resolvido":false}]}

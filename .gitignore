@@ -5,6 +5,7 @@ Thumbs.db
 
 # PDFs de referência (enunciado e planejamento) ficam fora do repositório
 /*.pdf
+!/Ordenha_Monitorada.pdf
 
 # IDEs
 .idea/
