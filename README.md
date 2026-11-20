@@ -82,7 +82,7 @@ python -m unittest -v test_regras.py
 
 ## Vídeo pitch
 
-Link: (https://youtu.be/Cz5no7r_b1U)
+Link: https://youtu.be/Cz5no7r_b1U
 
 ## Créditos
 
