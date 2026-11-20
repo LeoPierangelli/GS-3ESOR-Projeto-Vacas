@@ -37,7 +37,7 @@ O enunciado diz que as partes não precisam estar integradas: cada uma roda sozi
 | [`banco/`](banco/README.md) | 1 · Banco de dados: diagrama ER, script `.sql`, carga inicial e consultas | 2 | pronta |
 | [`api/`](api/README.md) | 2 · API RESTful (Java + Spring) e 5 · Segurança | 4 + 2 | pronta |
 | [`testes/`](testes/README.md) | 3 · Plano de testes e evidências | 2 | a fazer |
-| [`mobile/`](mobile/README.md) | 4 · Front-end mobile | 3 | a fazer |
+| [`mobile/`](mobile/README.md) | 4 · Front-end mobile | 3 | pronta |
 | [`iot/`](iot/README.md) | 6 · Simulação de IoT | 2 | pronta |
 | [`docs/`](docs/) | textos do PDF e o contrato entre as partes | — | — |
 | [`integrantes.txt`](integrantes.txt) | o `.txt` da entrega: grupo, RM, nomes e link do pitch | — | a preencher |
