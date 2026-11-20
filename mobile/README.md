@@ -106,3 +106,7 @@ O front-end não chama a API: login, listagem e cadastro são simulados em `Repo
 ## Créditos
 
 A ideia de uso da condutividade elétrica como indicador de suspeita de mastite tem como referência o protótipo MastitAlert (Universidade Católica de Petrópolis) e as fontes técnicas listadas no documento de planejamento do grupo. Leituras e animais deste aplicativo são simulados.
+
+## Dados mockados
+
+O app usa um mock próprio em `app/src/main/java/com/ordenha/monitorada/RepositorioMock.kt` e **não lê** o `mock_app.json` desta pasta. Os dados (login `produtor@teste.com` / `123456`, 8 vacas com brincos `101` a `204`) são diferentes dos do `mock_app.json`. Quando a API estiver pronta, só o `RepositorioMock.kt` precisa mudar.
