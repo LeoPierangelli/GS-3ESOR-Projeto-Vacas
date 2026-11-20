@@ -1,5 +1,7 @@
 # Ordenha Monitorada: aplicativo Android
 
+▶ **Veja o app funcionando:** [vídeo de demonstração](https://www.youtube.com/watch?v=n6WZFEs6yWc), gravado no emulador do Android Studio.
+
 O app do produtor, feito em **Kotlin + Jetpack Compose (Material 3)**, com **Navigation Compose**. Ele usa dados mockados e não depende da API para rodar, como o enunciado permite.
 
 ## Requisitos
