@@ -1,0 +1,13 @@
+Evidência: senhas gravadas só como hash BCrypt (consulta direta no MySQL)
+Executado: 20/11/2026 18:13:33
+Comando: docker exec ordenha-mysql mysql -uordenha -pordenha ordenha -e "SELECT id, email, senha_hash FROM usuario"
+
++----+------------------------------+--------------------------------------------------------------+
+| id | email                        | senha_hash                                                   |
++----+------------------------------+--------------------------------------------------------------+
+|  1 | joao@exemplo.com             | $2a$10$dJLHVPXnJCFg2aOsSeMXkuGM0cHLJ1x5w1ZfXJGY.gg2q.GtbdWta |
+|  2 | maria@exemplo.com            | $2a$10$yv/JYJu1n4mCM0SbBcfUqO/NxVYjDnDuLnaoEBPkxFrkpapUekcZK |
+|  3 | teste.1795209202@exemplo.com | $2a$10$gde9dRt6UeJcaJnM.S5eL.NZu3Tn7.e1XpQzbQbHObu.O2SGFYwO. |
++----+------------------------------+--------------------------------------------------------------+
+
+Nenhuma linha guarda a senha em texto puro: todas começam com $2a$10$ (BCrypt, custo 10, salt próprio).

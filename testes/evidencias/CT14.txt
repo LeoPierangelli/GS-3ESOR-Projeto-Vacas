@@ -1,0 +1,13 @@
+Caso:      CT14 · XSS no nome da vaca
+Executado: 20/11/2026 18:13:22
+Entrada:   nome <script>…</script>
+Esperado:  400, nada gravado
+Obtido:    400
+Resultado: PASSOU
+
+--- Requisição ---
+POST /vacas
+{"propriedadeId":1,"brinco":"X-1","nome":"<script>alert(1)</script>"}
+
+--- Resposta (HTTP 400) ---
+{"status":400,"erro":"Bad Request","mensagem":"Dados de entrada inválidos","campos":{"nome":"não pode conter os caracteres < ou >"},"timestamp":"2026-11-20T18:13:22.957116673"}

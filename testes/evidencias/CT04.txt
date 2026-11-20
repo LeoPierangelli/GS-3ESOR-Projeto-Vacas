@@ -1,0 +1,13 @@
+Caso:      CT04 · Brinco repetido na propriedade
+Executado: 20/11/2026 18:13:22
+Entrada:   brinco T-209202 de novo
+Esperado:  409
+Obtido:    409
+Resultado: PASSOU
+
+--- Requisição ---
+POST /vacas
+{"propriedadeId":1,"brinco":"T-209202","nome":"Repetida"}
+
+--- Resposta (HTTP 409) ---
+{"status":409,"erro":"Conflict","mensagem":"Já existe uma vaca com o brinco T-209202 nesta propriedade","timestamp":"2026-11-20T18:13:22.653904186"}

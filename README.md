@@ -36,10 +36,10 @@ O enunciado diz que as partes não precisam estar integradas: cada uma roda sozi
 |---|---|---|---|
 | [`banco/`](banco/README.md) | 1 · Banco de dados: diagrama ER, script `.sql`, carga inicial e consultas | 2 | pronta |
 | [`api/`](api/README.md) | 2 · API RESTful (Java + Spring) e 5 · Segurança | 4 + 2 | pronta |
-| [`testes/`](testes/README.md) | 3 · Plano de testes e evidências | 2 | a fazer |
+| [`testes/`](testes/README.md) | 3 · Plano de testes e evidências | 2 | pronta |
 | [`mobile/`](mobile/README.md) | 4 · Front-end mobile | 3 | pronta |
 | [`iot/`](iot/README.md) | 6 · Simulação de IoT | 2 | pronta |
-| [`docs/`](docs/) | textos do PDF e o contrato entre as partes | — | — |
+| [`docs/`](docs/) | textos do PDF ([partes 1 e 6](docs/texto_pdf_parte1.md), [abertura, partes 2 a 5 e ODS](docs/texto_pdf_partes2a5.md)) e o contrato entre as partes | — | — |
 | [`integrantes.txt`](integrantes.txt) | o `.txt` da entrega: grupo, RM, nomes e link do pitch | — | a preencher |
 
 **O contrato entre as partes** está em [`docs/REGRAS.md`](docs/REGRAS.md): regras de alerta, usuários de teste, o papel de cada vaca da carga e os casos de teste. Os nomes de tabelas, campos e rotas são os mesmos em todas as partes: `usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`.
@@ -65,7 +65,13 @@ Depois, abra o Swagger em http://localhost:8080/swagger-ui.html e faça login co
 python simulador_sensores.py --propriedade 1 --doente 1 --api http://localhost:8080 --token SEU_TOKEN
 ```
 
-**3. Testes automatizados.** Os da API rodam dentro de `api/`, e os do IoT dentro de `iot/`:
+**3. Plano de testes da API**, com a API rodando, na raiz do repositório. Ele grava as evidências em `testes/evidencias/`:
+
+```bash
+bash testes/executar_testes.sh
+```
+
+**4. Testes automatizados de unidade.** Os da API rodam dentro de `api/`, os do IoT dentro de `iot/` e os do app dentro de `mobile/` (`./gradlew testDebugUnitTest`):
 
 ```bash
 ./mvnw test

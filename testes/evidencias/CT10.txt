@@ -1,0 +1,13 @@
+Caso:      CT10 · SQL injection no login
+Executado: 20/11/2026 18:13:22
+Entrada:   email ' OR '1'='1
+Esperado:  401, sem erro de banco
+Obtido:    401
+Resultado: PASSOU
+
+--- Requisição ---
+POST /auth/login
+{"email":"' OR '1'='1","senha":"x"}
+
+--- Resposta (HTTP 401) ---
+{"status":401,"erro":"Unauthorized","mensagem":"Email ou senha inválidos","timestamp":"2026-11-20T18:13:22.898164395"}

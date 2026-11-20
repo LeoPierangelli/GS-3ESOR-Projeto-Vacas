@@ -1,0 +1,48 @@
+Evidência: testes automatizados de unidade das três partes
+Executado: 20/11/2026 18:13:45
+
+=== API (Java, JUnit 5) · cd api && ./mvnw test ===
+-------------------------------------------------------------------------------
+Test set: br.com.fiap.ordenha.service.RegrasAlertaServiceTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.106 s -- in br.com.fiap.ordenha.service.RegrasAlertaServiceTest
+
+=== App mobile (Kotlin, JUnit 4) · cd mobile && ./gradlew testDebugUnitTest ===
+name="com.ordenha.monitorada.RepositorioMockTest" tests="8" failures="0" errors="0" name="pc-do-bisteca" 
+  ok "loginMostraSoAsVacasDoProdutor"
+  ok "pintadaEmTratamentoTemLeiteEmCarencia"
+  ok "cargaIgualAoBanco"
+  ok "cadastroRecusaBrincoRepetidoNaPropriedade"
+  ok "todosOsAlertasReferenciamVacasEOrdenhasExistentes"
+  ok "cadaVacaEmLactacaoTemDezDiasEDoisTurnos"
+  ok "quedaDeProducaoDaEstrelaSegueARegraDaApi"
+  ok "suspeitaDeMastiteDaMimosaSegueARegraDaApi"
+
+=== Simulador de IoT (Python, unittest) · cd iot && python -m unittest -v test_regras.py ===
+test_uma_ordenha_pode_disparar_as_tres_regras (test_regras.TestAcumulo.test_uma_ordenha_pode_disparar_as_tres_regras) ... ok
+test_antes_do_inicio_nao_dispara (test_regras.TestCarencia.test_antes_do_inicio_nao_dispara) ... ok
+test_dia_seguinte_nao_dispara (test_regras.TestCarencia.test_dia_seguinte_nao_dispara) ... ok
+test_ordenha_durante_a_carencia_dispara (test_regras.TestCarencia.test_ordenha_durante_a_carencia_dispara) ... ok
+test_tratamento_sem_data_fim_continua_em_carencia (test_regras.TestCarencia.test_tratamento_sem_data_fim_continua_em_carencia) ... ok
+test_ultimo_dia_de_carencia_ainda_dispara (test_regras.TestCarencia.test_ultimo_dia_de_carencia_ainda_dispara) ... ok
+test_acima_de_15_por_cento_da_media_dispara (test_regras.TestMastite.test_acima_de_15_por_cento_da_media_dispara) ... ok
+test_com_3_ordenhas_ja_avalia (test_regras.TestMastite.test_com_3_ordenhas_ja_avalia) ... ok
+test_com_menos_de_3_ordenhas_nao_avalia (test_regras.TestMastite.test_com_menos_de_3_ordenhas_nao_avalia) ... ok
+test_leitura_normal_nao_gera_alerta (test_regras.TestMastite.test_leitura_normal_nao_gera_alerta) ... ok
+test_logo_abaixo_de_15_por_cento_nao_dispara (test_regras.TestMastite.test_logo_abaixo_de_15_por_cento_nao_dispara) ... ok
+test_mastite_repete_a_cada_ordenha_como_na_api (test_regras.TestMastite.test_mastite_repete_a_cada_ordenha_como_na_api) ... ok
+test_media_usa_so_as_7_ultimas (test_regras.TestMastite.test_media_usa_so_as_7_ultimas) ... ok
+test_precisa_de_5_ordenhas_anteriores (test_regras.TestQuedaProducao.test_precisa_de_5_ordenhas_anteriores) ... ok
+test_queda_nao_repete_com_alerta_aberto (test_regras.TestQuedaProducao.test_queda_nao_repete_com_alerta_aberto) ... ok
+test_so_duas_seguidas_nao_dispara (test_regras.TestQuedaProducao.test_so_duas_seguidas_nao_dispara) ... ok
+test_tres_ordenhas_seguidas_abaixo_de_80_por_cento_dispara (test_regras.TestQuedaProducao.test_tres_ordenhas_seguidas_abaixo_de_80_por_cento_dispara) ... ok
+test_uma_normal_no_meio_quebra_a_sequencia (test_regras.TestQuedaProducao.test_uma_normal_no_meio_quebra_a_sequencia) ... ok
+test_alarme_do_aparelho_no_limite_do_mastitalert (test_regras.TestSensorMastitAlert.test_alarme_do_aparelho_no_limite_do_mastitalert) ... ok
+test_conversor_fica_entre_0_e_1023 (test_regras.TestSensorMastitAlert.test_conversor_fica_entre_0_e_1023) ... ok
+test_equacoes_do_artigo_ida_e_volta (test_regras.TestSensorMastitAlert.test_equacoes_do_artigo_ida_e_volta) ... ok
+test_medidor_de_volume (test_regras.TestSensorMastitAlert.test_medidor_de_volume) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.001s
+
+OK

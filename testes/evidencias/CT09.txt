@@ -1,0 +1,12 @@
+Caso:      CT09 · Vaca inexistente
+Executado: 20/11/2026 18:13:22
+Entrada:   GET /vacas/9999
+Esperado:  404
+Obtido:    404
+Resultado: PASSOU
+
+--- Requisição ---
+GET /vacas/9999
+
+--- Resposta (HTTP 404) ---
+{"status":404,"erro":"Not Found","mensagem":"Vaca 9999 não encontrada","timestamp":"2026-11-20T18:13:22.881486001"}
