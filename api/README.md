@@ -119,7 +119,7 @@ Exemplo de leitura enviada pelos sensores (`POST /ordenhas`):
 }
 ```
 
-- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`docs/REGRAS.md`](../docs/REGRAS.md).
+- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`docs/README.md`](../docs/README.md).
 - **`dataHora`:** use o momento atual ou um horário recente. Data futura responde 400, e a mesma vaca no mesmo horário de uma leitura que já existe responde 409.
 - **Resposta:** traz a ordenha gravada e a lista `alertasGerados`, que vem vazia quando nenhuma regra dispara. No exemplo acima, a Malhada (média em torno de 0,400 mS) gera `SUSPEITA_MASTITE`.
 
@@ -183,5 +183,4 @@ As datas da carga são relativas ao dia em que o banco é criado (os 10 dias ant
 
 ## Uso de IA generativa
 
-<!-- Ajustar antes da entrega: listar as ferramentas usadas e para quê. -->
 Usamos o Claude (Anthropic) como apoio para montar o esqueleto do projeto, revisar o código e escrever a documentação. Todo o código foi revisado, executado e testado pelo grupo.

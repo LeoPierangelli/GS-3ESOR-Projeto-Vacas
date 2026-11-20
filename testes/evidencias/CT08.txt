@@ -1,5 +1,5 @@
 Caso:      CT08 · Ordenha de vaca em carência
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   SL-010 com tratamento ativo
 Esperado:  201 e alerta LEITE_EM_CARENCIA
 Obtido:    201
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /ordenhas
-{"vacaId":6,"dataHora":"2026-11-20T18:12:22","turno":"MANHA","litros":9.5,"condutividade":0.44}
+{"vacaId":6,"dataHora":"2026-11-20T19:22:10","turno":"MANHA","litros":9.5,"condutividade":0.44}
 
 --- Resposta (HTTP 201) ---
-{"ordenha":{"id":143,"vacaId":6,"dataHora":"2026-11-20T18:12:22","turno":"MANHA","litros":9.5,"condutividade":0.44},"alertasGerados":[{"id":23,"vacaId":6,"brinco":"SL-010","nomeVaca":"Pintada","ordenhaId":143,"tipo":"LEITE_EM_CARENCIA","mensagem":"Não enviar este leite ao tanque","dataHora":"2026-11-20T18:12:22","resolvido":false}]}
+{"ordenha":{"id":143,"vacaId":6,"dataHora":"2026-11-20T19:22:10","turno":"MANHA","litros":9.5,"condutividade":0.44},"alertasGerados":[{"id":23,"vacaId":6,"brinco":"SL-010","nomeVaca":"Pintada","ordenhaId":143,"tipo":"LEITE_EM_CARENCIA","mensagem":"Não enviar este leite ao tanque","dataHora":"2026-11-20T19:22:10","resolvido":false}]}

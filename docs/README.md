@@ -1,27 +1,21 @@
-# Contrato entre as partes: banco, regras de alerta e dados de exemplo
+# docs: o contrato entre as partes
 
-Para todo o grupo: API (Leo), app, testes e vídeo.
-O banco oficial (`banco/`) foi feito para encaixar na API **sem mudar nenhuma linha do código Java**.
+As regras de alerta, os usuários de teste, o papel de cada vaca da carga e os casos de teste das regras. É a referência comum ao banco, à API, ao app, ao simulador, aos testes e ao vídeo.
 
-## 1. Banco oficial × banco provisório da API
+## 1. Banco
 
-O `docker-compose.yml` da API roda direto `banco/01_criar_tabelas.sql` e `banco/02_carga_inicial.sql` (não há cópia na pasta da API). A carga é gerada por `banco/gerar_dados.py`.
-Para usar o banco oficial com a API, recrie o banco do Docker uma vez, dentro de `api/`:
+O banco oficial fica em `banco/`, e a carga é gerada por `banco/gerar_dados.py` (que gera também os dados do app e do simulador). O `docker-compose.yml` da API roda direto `banco/01_criar_tabelas.sql` e `banco/02_carga_inicial.sql`, sem cópia na pasta da API. Para recriar o banco do zero, dentro de `api/`:
 
 ```bash
 docker compose down -v
 docker compose up -d
 ```
 
-| Item | Provisório (antes) | Oficial (agora) | Impacto na API |
-|---|---|---|---|
-| Banco, tabelas, colunas | `ordenha`, 6 tabelas | os mesmos nomes | nenhum |
-| `alerta.vaca_id` | FK simples para `vaca` | **FK composta `(ordenha_id, vaca_id)` → `ordenha(id, vaca_id)`**: o alerta sempre aponta para a vaca da própria ordenha | nenhum (a API já grava a vaca da ordenha) |
-| `tratamento.data_fim` | opcional | opcional (NULL = tratamento em andamento, leite segue em carência) | nenhum |
-| Constraints | básicas | + vaca e momento únicos (leitura repetida vira 409), um alerta por tipo e ordenha, resolvido 0/1, hash com 50+ caracteres, índices | nenhum (todas compatíveis com as validações da API) |
-| Datas da carga | fixas (08 a 17/11) | **relativas ao dia em que o banco é criado** (os 10 dias anteriores) | as consultas e a carência funcionam em qualquer dia |
-| Usuários e vacas | João/Maria, vacas 1 a 8 | **os mesmos** (mesmos emails, senhas, nomes, brincos e papéis) | Swagger e Postman continuam valendo |
-| Condutividade | escala mS/cm (4,6 a 6,3) | **escala mS do MastitAlert (cerca de 0,34 a 0,65)** | nenhum nas regras (são relativas). Só o exemplo do README da API (`6.8`) deve virar algo como `0.55` |
+- **Tabelas e colunas:** `usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`, com os mesmos nomes na API e no app.
+- **`alerta.vaca_id`:** FK composta `(ordenha_id, vaca_id)` → `ordenha(id, vaca_id)`, então o alerta sempre aponta para a vaca da própria ordenha.
+- **`tratamento.data_fim`:** opcional. NULL significa tratamento em andamento, com o leite ainda em carência.
+- **Datas da carga:** relativas ao dia em que o banco é criado (os 10 dias anteriores), então as consultas e a carência funcionam em qualquer dia.
+- **Condutividade:** em mS, na escala do MastitAlert (de cerca de 0,34 a 0,65).
 
 ## 2. Usuários de teste
 
@@ -66,7 +60,7 @@ Cada camada cobre o ponto fraco da outra:
 
 ## 5. Casos de teste das regras
 
-`iot/test_regras.py` tem 22 testes automatizados (`python -m unittest -v test_regras.py`, dentro de `iot/`). Os principais, para o plano de testes:
+`iot/test_regras.py` tem 22 testes automatizados (`python3 -m unittest -v test_regras.py`, dentro de `iot/`). Os principais, para o plano de testes:
 
 | # | Histórico (anteriores) | Leitura | Esperado |
 |---|---|---|---|

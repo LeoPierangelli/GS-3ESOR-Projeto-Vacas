@@ -91,4 +91,4 @@ O alerta é sempre uma suspeita, nunca um diagnóstico. Os percentuais são valo
 
 ## Créditos
 
-A ideia de usar a condutividade elétrica do leite como indicador de suspeita de mastite vem do protótipo MastitAlert (Universidade Católica de Petrópolis) e das fontes listadas em [`docs/texto_pdf_parte1.md`](../docs/texto_pdf_parte1.md). Todos os dados são fictícios.
+A ideia de usar a condutividade elétrica do leite como indicador de suspeita de mastite vem do protótipo MastitAlert (Universidade Católica de Petrópolis) e das fontes listadas no [PDF de entrega](../Ordenha_Monitorada.pdf), na seção "Fontes e créditos". Todos os dados são fictícios.

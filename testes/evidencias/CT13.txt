@@ -1,5 +1,5 @@
 Caso:      CT13 · Ordenha com data futura
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   dataHora amanhã
 Esperado:  400, erro no campo dataHora
 Obtido:    400
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /ordenhas
-{"vacaId":2,"dataHora":"2026-11-21T18:13:22","turno":"MANHA","litros":9.0,"condutividade":0.40}
+{"vacaId":2,"dataHora":"2026-11-21T19:23:10","turno":"MANHA","litros":9.0,"condutividade":0.40}
 
 --- Resposta (HTTP 400) ---
-{"status":400,"erro":"Bad Request","mensagem":"Dados de entrada inválidos","campos":{"dataHora":"não pode ser no futuro"},"timestamp":"2026-11-20T18:13:22.942196578"}
+{"status":400,"erro":"Bad Request","mensagem":"Dados de entrada inválidos","campos":{"dataHora":"não pode ser no futuro"},"timestamp":"2026-11-20T19:23:10.845725804"}

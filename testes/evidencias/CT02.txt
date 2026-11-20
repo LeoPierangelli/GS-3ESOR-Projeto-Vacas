@@ -1,5 +1,5 @@
 Caso:      CT02 · Login com senha errada
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   email existente, senha incorreta
 Esperado:  401 e mensagem genérica
 Obtido:    401
@@ -10,4 +10,4 @@ POST /auth/login
 {"email":"joao@exemplo.com","senha":"errada123"}
 
 --- Resposta (HTTP 401) ---
-{"status":401,"erro":"Unauthorized","mensagem":"Email ou senha inválidos","timestamp":"2026-11-20T18:13:22.492118833"}
+{"status":401,"erro":"Unauthorized","mensagem":"Email ou senha inválidos","timestamp":"2026-11-20T19:23:10.429201902"}

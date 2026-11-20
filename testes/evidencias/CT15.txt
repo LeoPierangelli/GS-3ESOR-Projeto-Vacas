@@ -1,5 +1,5 @@
 Caso:      CT15 · Excluir vaca
-Executado: 20/11/2026 18:13:23
+Executado: 20/11/2026 19:23:10
 Entrada:   DELETE /vacas/9
 Esperado:  204 e depois 404
 Obtido:    204 → 404

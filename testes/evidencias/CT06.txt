@@ -1,5 +1,5 @@
 Caso:      CT06 · Ordenha normal
-Executado: 20/11/2026 18:13:22
+Executado: 20/11/2026 19:23:10
 Entrada:   BR-002, 9,0 L, 0,402 mS
 Esperado:  201 e nenhum alerta
 Obtido:    201
@@ -7,7 +7,7 @@ Resultado: PASSOU
 
 --- Requisição ---
 POST /ordenhas
-{"vacaId":2,"dataHora":"2026-11-20T18:12:02","turno":"MANHA","litros":9.0,"condutividade":0.402}
+{"vacaId":2,"dataHora":"2026-11-20T19:21:50","turno":"MANHA","litros":9.0,"condutividade":0.402}
 
 --- Resposta (HTTP 201) ---
-{"ordenha":{"id":141,"vacaId":2,"dataHora":"2026-11-20T18:12:02","turno":"MANHA","litros":9.0,"condutividade":0.402},"alertasGerados":[]}
+{"ordenha":{"id":141,"vacaId":2,"dataHora":"2026-11-20T19:21:50","turno":"MANHA","litros":9.0,"condutividade":0.402},"alertasGerados":[]}

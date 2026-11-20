@@ -1,16 +1,16 @@
 # Ordenha Monitorada: Simulação de IoT
 
 Simulador dos dois sensores da ordenha (volume e condutividade elétrica do leite), inspirado no protótipo **MastitAlert** (Portugal & Guedes, 2021).
-Funciona sozinho ou integrado à API (`POST /ordenhas`). Precisa de Python 3.8+ e não instala nada.
+Funciona sozinho ou integrado à API (`POST /ordenhas`). Precisa de Python 3.8+ e não instala nada. No Linux e no WSL o comando é `python3`; no Windows, `python`.
 
 ## Como rodar (dentro da pasta `iot/`)
 
 ```bash
-python simulador_sensores.py --reset                  # recria o histórico igual à carga do banco + 1 ordenha
-python simulador_sensores.py --doente 1               # vaca 1 com mastite: aparelho apita, sistema alerta, válvula desvia
-python simulador_sensores.py --doente 1 --sessoes 3   # 3 ordenhas seguidas: dispara também a queda de produção
-python simulador_sensores.py --leite-frio 2           # leitura da vaca 2 descartada (leite frio)
-python -m unittest -v test_regras.py                  # 22 testes automatizados
+python3 simulador_sensores.py --reset                  # recria o histórico igual à carga do banco + 1 ordenha
+python3 simulador_sensores.py --doente 1               # vaca 1 com mastite: aparelho apita, sistema alerta, válvula desvia
+python3 simulador_sensores.py --doente 1 --sessoes 3   # 3 ordenhas seguidas: dispara também a queda de produção
+python3 simulador_sensores.py --leite-frio 2           # leitura da vaca 2 descartada (leite frio)
+python3 -m unittest -v test_regras.py                  # 22 testes automatizados
 ```
 
 **Integrado com a API** (diferencial):
@@ -18,7 +18,7 @@ python -m unittest -v test_regras.py                  # 22 testes automatizados
 2. Faça o login no Swagger com `joao@exemplo.com` / `senha123` e copie o token.
 3. Rode o simulador:
    ```bash
-   python simulador_sensores.py --propriedade 1 --doente 1 --api http://localhost:8080 --token SEU_TOKEN
+   python3 simulador_sensores.py --propriedade 1 --doente 1 --api http://localhost:8080 --token SEU_TOKEN
    ```
 
 Cada leitura vai para `POST /ordenhas`. O simulador mostra os alertas que a API gerou de verdade e confere se são os mesmos que ele previu. Use `--propriedade 1` com o login do João: as vacas da propriedade 2 são da Maria, e a API responde 404 para elas.
@@ -42,7 +42,7 @@ Cada leitura vai para `POST /ordenhas`. O simulador mostra os alertas que a API 
 ## Créditos
 
 - **Sensor de condutividade inspirado em:** PORTUGAL, G.; GUEDES, G. *MastitAlert: towards detection of mastitis during the act of milking.* BreSci 2021, SBC, p. 141-144. DOI 10.5753/bresci.2021.15800.
-- **Demais referências:** em [`docs/texto_pdf_parte1.md`](../docs/texto_pdf_parte1.md).
+- **Demais referências:** na seção "Fontes e créditos" do [PDF de entrega](../Ordenha_Monitorada.pdf).
 - **Dados:** todos os dados são simulados.
 
 ## Uso de IA generativa

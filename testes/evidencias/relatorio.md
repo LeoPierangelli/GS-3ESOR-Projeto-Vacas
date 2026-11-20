@@ -1,6 +1,6 @@
 # Relatório de execução do plano de testes
 
-- **Executado em:** 20/11/2026 18:13:23
+- **Executado em:** 20/11/2026 19:23:10
 - **API:** http://localhost:8080
 - **Resultado:** 15 de 15 casos passaram
 
@@ -8,8 +8,8 @@
 |---|---|---|---|---|---|
 | CT01 | Cadastro de usuário válido | nome, email novo, senha válida | 201, sem senha nem hash na resposta | 201 | **PASSOU** |
 | CT02 | Login com senha errada | email existente, senha incorreta | 401 e mensagem genérica | 401 | **PASSOU** |
-| CT03 | Cadastro de vaca válido | brinco novo T-209202 | 201 e aparece em GET /vacas | 201, id 9 | **PASSOU** |
-| CT04 | Brinco repetido na propriedade | brinco T-209202 de novo | 409 | 409 | **PASSOU** |
+| CT03 | Cadastro de vaca válido | brinco novo T-213390 | 201 e aparece em GET /vacas | 201, id 9 | **PASSOU** |
+| CT04 | Brinco repetido na propriedade | brinco T-213390 de novo | 409 | 409 | **PASSOU** |
 | CT05 | Ordenha com litros negativos | litros = -2 | 400, erro no campo litros | 400 | **PASSOU** |
 | CT06 | Ordenha normal | BR-002, 9,0 L, 0,402 mS | 201 e nenhum alerta | 201 | **PASSOU** |
 | CT07 | Condutividade acima da média | BR-002, 0,480 mS (+20%) | 201 e alerta SUSPEITA_MASTITE | 201 | **PASSOU** |
