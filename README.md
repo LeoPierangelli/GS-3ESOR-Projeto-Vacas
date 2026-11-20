@@ -41,7 +41,6 @@ Cada parte tem uma pasta com um README que explica como ela funciona e como rod�
 | [`testes/`](testes/README.md) | 3 · Plano de testes, script de execução e evidências | bash + curl, JUnit, unittest |
 | [`mobile/`](mobile/README.md) | 4 · Front-end mobile | Kotlin, Jetpack Compose |
 | [`iot/`](iot/README.md) | 6 · Simulação de IoT | Python 3 |
-| [`docs/`](docs/README.md) | o contrato entre as partes: regras de alerta, usuários de teste e o papel de cada vaca da carga | — |
 
 As partes usam o mesmo domínio: as tabelas do banco (`usuario`, `propriedade`, `vaca`, `ordenha`, `alerta` e `tratamento`) são os recursos da API e os dados do app. O simulador grava as leituras pela API. O app usa dados mockados, com a mesma carga do banco, e não chama a API (o enunciado permite).
 

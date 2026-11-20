@@ -119,7 +119,7 @@ Exemplo de leitura enviada pelos sensores (`POST /ordenhas`):
 }
 ```
 
-- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40). Veja [`docs/README.md`](../docs/README.md).
+- **Unidades:** litros com 1 casa decimal e condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40).
 - **`dataHora`:** use o momento atual ou um horário recente. Data futura responde 400, e a mesma vaca no mesmo horário de uma leitura que já existe responde 409.
 - **Resposta:** traz a ordenha gravada e a lista `alertasGerados`, que vem vazia quando nenhuma regra dispara. No exemplo acima, a Malhada (média em torno de 0,400 mS) gera `SUSPEITA_MASTITE`.
 

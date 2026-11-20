@@ -71,4 +71,3 @@ Eles rodam por comando e geram relatório, o que conta como diferencial.
 
 - **Postman:** importe [`api/docs/ordenha-api.postman_collection.json`](../api/docs/ordenha-api.postman_collection.json) e clique em *Run*. Cada requisição já confere o status esperado.
 - **Swagger:** abra http://localhost:8080/swagger-ui.html com a API rodando.
-- **Casos das regras de alerta, de R1 a R9:** em [`docs/README.md`](../docs/README.md), seção 5. Estão cobertos pelos testes do simulador de IoT.

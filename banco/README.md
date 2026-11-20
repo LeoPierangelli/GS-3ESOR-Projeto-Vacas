@@ -45,4 +45,3 @@ docker compose up -d
 - **Exclusão em cascata.** Ordenhas, alertas e tratamentos caem junto com a vaca, então `DELETE /vacas/{id}` funciona.
 - **Condutividade em mS**, na escala do protótipo MastitAlert (vaca sadia com cerca de 0,4 a 0,5 mS).
 
-O contrato completo (regras, casos de teste e roteiro das vacas) está em [`docs/README.md`](../docs/README.md).
