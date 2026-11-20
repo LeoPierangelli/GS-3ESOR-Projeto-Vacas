@@ -2,10 +2,10 @@ Grupo: Ordenha Monitorada
 Global Solution 2026/2 - FIAP - 3ESOR
 
 Integrantes (RM - Nome):
-RM00000 - Nome Completo
-RM00000 - Nome Completo
-RM00000 - Nome Completo
-RM00000 - Nome Completo
+RM559995 - Beatriz de Oliveira Lima
+RM560501 - Leonardo de Souza Pierangelli
+RM560637 - Maryelle Pereira Lopes
+RM559580 - Pedro Arão Baquini
 
-Vídeo pitch: (link público)
+Vídeo pitch: (https://youtu.be/Cz5no7r_b1U)
 Repositório: https://github.com/LeoPierangelli/GS-3ESOR-Projeto-Vacas
