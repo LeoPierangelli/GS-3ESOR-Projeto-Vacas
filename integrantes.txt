@@ -7,5 +7,5 @@ RM560501 - Leonardo de Souza Pierangelli
 RM560637 - Maryelle Pereira Lopes
 RM559580 - Pedro Arão Baquini
 
-Vídeo pitch: (https://youtu.be/Cz5no7r_b1U)
+Vídeo pitch: https://youtu.be/Cz5no7r_b1U
 Repositório: https://github.com/LeoPierangelli/GS-3ESOR-Projeto-Vacas
