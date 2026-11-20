@@ -87,8 +87,8 @@ fun FichaVacaScreen(vacaId: Int, onVoltar: () -> Unit) {
                         val diff = (ultima / media - 1) * 100
                         val acima = diff > Regras.LIMITE_CONDUTIVIDADE_PCT
                         val cor = if (acima) CorSuspeita else CorNormal
-                        Text("Última leitura: ${formatarNumero(ultima)} mS/cm", style = MaterialTheme.typography.titleLarge)
-                        Text("Média das ${Regras.JANELA_MEDIA_ORDENHAS} ordenhas anteriores: ${formatarNumero(media)} mS/cm")
+                        Text("Última leitura: ${formatarCondutividade(ultima)} mS", style = MaterialTheme.typography.titleLarge)
+                        Text("Média das ${Regras.JANELA_MEDIA_ORDENHAS} ordenhas anteriores: ${formatarCondutividade(media)} mS")
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 if (acima) Icons.Default.Warning else Icons.Default.CheckCircle,
@@ -129,7 +129,7 @@ fun FichaVacaScreen(vacaId: Int, onVoltar: () -> Unit) {
                     } else {
                         tratamentos.forEach { t ->
                             Text(t.medicamento, fontWeight = FontWeight.SemiBold)
-                            Text("${formatarData(t.dataInicio)} a ${formatarData(t.dataFim)} · carência de ${t.diasCarencia} dias")
+                            Text("${formatarData(t.dataInicio)} a ${t.dataFim?.let { formatarData(it) } ?: "em andamento"} · carência de ${t.diasCarencia} dias")
                             if (t.observacao.isNotBlank()) Text(t.observacao)
                         }
                     }
@@ -147,7 +147,7 @@ fun FichaVacaScreen(vacaId: Int, onVoltar: () -> Unit) {
                         ) {
                             Text(formatarDataHora(o.dataHora))
                             Text("${formatarNumero(o.litros)} L", fontWeight = FontWeight.SemiBold)
-                            Text("${formatarNumero(o.condutividade)} mS/cm")
+                            Text("${formatarCondutividade(o.condutividade)} mS")
                         }
                     }
                 }

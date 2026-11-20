@@ -2,7 +2,8 @@
 Gera, a partir de UMA única definição do rebanho, todos os dados de exemplo:
 
   banco/02_carga_inicial.sql          INSERTs da carga inicial (MySQL)
-  mobile/mock_app.json                mock do app (mesmo formato das tabelas)
+  mobile/app/src/main/java/com/ordenha/monitorada/DadosCarga.kt
+                                      mock do app Android (a mesma carga, em Kotlin)
   iot/dados/rebanho.json              perfil de cada vaca, usado pelo simulador
   iot/dados/historico_inicial.json    histórico que o simulador usa como ponto de partida
 
@@ -285,62 +286,65 @@ def iso(dt: datetime) -> str:
     return dt.strftime("%Y-%m-%dT%H:%M:%S")
 
 
-def escrever_mock(hoje, ordenhas, alertas, caminho: Path):
-    """Mock do app: o que o usuário 1 (João) vê depois do login."""
-    ids = {v["id"] for v in VACAS if v["propriedade_id"] == 1}
-    vacas = [{"id": v["id"], "propriedadeId": v["propriedade_id"], "brinco": v["brinco"],
-              "nome": v["nome"], "dataNascimento": v["data_nascimento"], "status": v["status"]}
-             for v in VACAS if v["id"] in ids]
-    ords = [{"id": o["id"], "vacaId": o["vaca_id"], "dataHora": iso(o["data_hora"]),
-             "turno": o["turno"], "litros": o["litros"], "condutividade": o["condutividade"]}
-            for o in ordenhas if o["vaca_id"] in ids]
-    alts = [{"id": a["id"], "vacaId": a["vaca_id"], "ordenhaId": a["ordenha_id"], "tipo": a["tipo"],
-             "mensagem": a["mensagem"], "dataHora": iso(a["ordenha"]["data_hora"]),
-             "resolvido": bool(a["resolvido"])}
-            for a in sorted(alertas, key=lambda a: a["ordenha"]["data_hora"], reverse=True)
-            if a["vaca_id"] in ids]
-    trats = [{"id": t["id"], "vacaId": t["vaca_id"], "medicamento": t["medicamento"],
-              "dataInicio": (hoje + timedelta(days=t["inicio"])).isoformat(),
-              "dataFim": None if t["fim"] is None else (hoje + timedelta(days=t["fim"])).isoformat(),
-              "diasCarencia": t["dias_carencia"], "observacao": t["observacao"]}
-             for t in TRATAMENTOS if t["vaca_id"] in ids]
+def kt(s):
+    """String literal em Kotlin (escapa barra, aspas e o $ dos templates)."""
+    return '"' + str(s).replace("\\", "\\\\").replace('"', '\\"').replace("$", "\\$") + '"'
 
-    painel = []
-    for v in vacas:
-        hist = [o for o in ords if o["vacaId"] == v["id"]]
-        abertos = [a for a in alts if a["vacaId"] == v["id"] and not a["resolvido"]]
-        if v["status"] in ("EM_TRATAMENTO", "SECA"):
-            situacao = v["status"]
-        elif any(a["tipo"] == regras.SUSPEITA_MASTITE for a in abertos):
-            situacao = "SUSPEITA"
-        elif abertos:
-            situacao = "ATENCAO"
-        else:
-            situacao = "NORMAL"
-        anteriores = [o["condutividade"] for o in hist[-(regras.JANELA + 1):-1]]
-        painel.append({
-            "vacaId": v["id"], "situacao": situacao, "alertasAbertos": len(abertos),
-            "ultimaCondutividade": hist[-1]["condutividade"] if hist else None,
-            "mediaCondutividade7": round(sum(anteriores) / len(anteriores), 3) if anteriores else None,
-            "litrosUltimos7Dias": round(sum(o["litros"] for o in hist
-                                            if o["dataHora"] >= iso(datetime.combine(
-                                                hoje - timedelta(days=7), time()))), 1)})
 
-    mock = {
-        "_leiaMe": ("Mock do app gerado a partir da carga do banco (mesmos IDs, brincos e usuários "
-                    "da API). Chaves em camelCase, igual à API. Datas fixas do dia em que foi gerado. "
-                    "Condutividade em mS (escala do MastitAlert). "
-                    "'painel' é derivado: situacao NORMAL | SUSPEITA | ATENCAO | EM_TRATAMENTO | SECA "
-                    "(SUSPEITA = alerta de mastite aberto; ATENCAO = outro alerta aberto). "
-                    f"Login de teste: {USUARIOS[0]['email']} / {SENHA_TESTE}."),
-        "geradoEm": hoje.isoformat(),
-        "usuario": {"id": 1, "nome": USUARIOS[0]["nome"], "email": USUARIOS[0]["email"]},
-        "propriedade": {"id": 1, "usuarioId": 1, "nome": PROPRIEDADES[0]["nome"],
-                        "municipio": PROPRIEDADES[0]["municipio"], "uf": PROPRIEDADES[0]["uf"]},
-        "vacas": vacas, "painel": painel, "alertas": alts, "tratamentos": trats, "ordenhas": ords,
-    }
-    caminho.write_text(json.dumps(mock, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
+def escrever_kotlin(ordenhas, alertas, caminho: Path):
+    """Mock do app Android: a mesma carga do banco, em Kotlin, com datas relativas a hoje."""
+    L = []
+    w = L.append
+    w("// ARQUIVO GERADO por banco/gerar_dados.py; não edite à mão.")
+    w("// É a mesma carga inicial do banco (banco/02_carga_inicial.sql): mesmos IDs, brincos,")
+    w("// usuários, ordenhas, alertas e tratamentos. As datas são relativas ao dia em que o")
+    w("// app roda (dia -10 a -1), como no banco. Condutividade em mS (escala do MastitAlert).")
+    w("package com.ordenha.monitorada")
+    w("")
+    w("internal data class UsuarioCarga(val id: Int, val nome: String, val email: String)")
+    w("internal data class OrdenhaCarga(val id: Int, val vacaId: Int, val dia: Int, val hora: String,")
+    w("                                 val turno: Turno, val litros: Double, val condutividade: Double)")
+    w("internal data class AlertaCarga(val id: Int, val vacaId: Int, val ordenhaId: Int, val tipo: TipoAlerta,")
+    w("                                val mensagem: String, val resolvido: Boolean)")
+    w("internal data class TratamentoCarga(val id: Int, val vacaId: Int, val medicamento: String, val inicio: Int,")
+    w("                                    val fim: Int?, val diasCarencia: Int, val observacao: String)")
+    w("")
+    w("internal object DadosCarga {")
+    w(f"    /** Senha dos usuários de exemplo, a mesma da API (lá ela fica só como hash BCrypt). */")
+    w(f"    const val SENHA = {kt(SENHA_TESTE)}")
+    w("")
+    w("    val usuarios = listOf(")
+    w(",\n".join(f"        UsuarioCarga({u['id']}, {kt(u['nome'])}, {kt(u['email'])})" for u in USUARIOS))
+    w("    )")
+    w("")
+    w("    val propriedades = listOf(")
+    w(",\n".join(f"        Propriedade({p['id']}, {p['usuario_id']}, {kt(p['nome'])}, {kt(p['municipio'])}, {kt(p['uf'])})"
+                   for p in PROPRIEDADES))
+    w("    )")
+    w("")
+    w("    val vacas = listOf(")
+    w(",\n".join(f"        Vaca({v['id']}, {v['propriedade_id']}, {kt(v['brinco'])}, {kt(v['nome'])}, "
+                   f"{kt(v['data_nascimento'])}, StatusVaca.{v['status']})" for v in VACAS))
+    w("    )")
+    w("")
+    w("    // id, vaca, dia relativo a hoje, hora, turno, litros, condutividade (mS)")
+    w("    val ordenhas = listOf(")
+    w(",\n".join(f"        OrdenhaCarga({o['id']}, {o['vaca_id']}, {o['off']}, \"{o['hh']:02d}:{o['mm']:02d}\", "
+                   f"Turno.{o['turno']}, {o['litros']}, {o['condutividade']})" for o in ordenhas))
+    w("    )")
+    w("")
+    w("    val alertas = listOf(")
+    w(",\n".join(f"        AlertaCarga({a['id']}, {a['vaca_id']}, {a['ordenha_id']}, TipoAlerta.{a['tipo']}, "
+                   f"{kt(a['mensagem'])}, {'true' if a['resolvido'] else 'false'})" for a in alertas))
+    w("    )")
+    w("")
+    w("    val tratamentos = listOf(")
+    w(",\n".join(f"        TratamentoCarga({t['id']}, {t['vaca_id']}, {kt(t['medicamento'])}, {t['inicio']}, "
+                   f"{'null' if t['fim'] is None else t['fim']}, {t['dias_carencia']}, {kt(t['observacao'])})"
+                   for t in TRATAMENTOS))
+    w("    )")
+    w("}")
+    caminho.write_text("\n".join(L) + "\n", encoding="utf-8")
 
 def escrever_iot(ordenhas, alertas, dir_dados: Path):
     rebanho = [{"id": v["id"], "propriedadeId": v["propriedade_id"], "brinco": v["brinco"],
@@ -371,10 +375,10 @@ def escrever_iot(ordenhas, alertas, dir_dados: Path):
 
 def main():
     hoje, ordenhas, alertas = gerar()
-    (RAIZ / "mobile").mkdir(exist_ok=True)
     (RAIZ / "iot" / "dados").mkdir(parents=True, exist_ok=True)
     escrever_sql(ordenhas, alertas, RAIZ / "banco" / "02_carga_inicial.sql")
-    escrever_mock(hoje, ordenhas, alertas, RAIZ / "mobile" / "mock_app.json")
+    escrever_kotlin(ordenhas, alertas,
+                    RAIZ / "mobile" / "app" / "src" / "main" / "java" / "com" / "ordenha" / "monitorada" / "DadosCarga.kt")
     escrever_iot(ordenhas, alertas, RAIZ / "iot" / "dados")
     print(f"OK: {len(ordenhas)} ordenhas, {len(alertas)} alertas "
           f"({sum(1 for a in alertas if not a['resolvido'])} abertos).")

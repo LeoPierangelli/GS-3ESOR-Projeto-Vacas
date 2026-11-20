@@ -60,7 +60,7 @@ fun RebanhoScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Rebanho") },
+                title = { Text(RepositorioMock.nomeUsuario()?.let { "Rebanho · $it" } ?: "Rebanho") },
                 actions = {
                     TextButton(onClick = onSair, modifier = Modifier.defaultMinSize(minHeight = 48.dp)) {
                         Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = null)
@@ -105,7 +105,7 @@ fun RebanhoScreen(
                     }
                 }
             }
-            items(RepositorioMock.vacas, key = { it.id }) { vaca ->
+            items(RepositorioMock.vacasDoUsuario(), key = { it.id }) { vaca ->
                 VacaCard(vaca, onClick = { onFicha(vaca.id) })
             }
         }

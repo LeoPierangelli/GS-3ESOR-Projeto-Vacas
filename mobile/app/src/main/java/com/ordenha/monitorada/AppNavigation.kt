@@ -34,6 +34,7 @@ fun AppNavigation() {
                 onFicha = { id -> nav.navigate(Rotas.ficha(id)) },
                 onCadastro = { nav.navigate(Rotas.CADASTRO) },
                 onSair = {
+                    RepositorioMock.sair()
                     nav.navigate(Rotas.LOGIN) { popUpTo(Rotas.REBANHO) { inclusive = true } }
                 }
             )

@@ -59,9 +59,7 @@ fun LoginScreen(onLoginOk: () -> Unit) {
             carregando = true
             delay(800) // simula a chamada POST /auth/login
             carregando = false
-            if (email.trim().equals(RepositorioMock.EMAIL_DEMO, ignoreCase = true) &&
-                senha == RepositorioMock.SENHA_DEMO
-            ) {
+            if (RepositorioMock.entrar(email, senha)) {
                 onLoginOk()
             } else {
                 erro = "Email ou senha inválidos"
@@ -131,7 +129,7 @@ fun LoginScreen(onLoginOk: () -> Unit) {
             }
 
             Text(
-                "Demo: ${RepositorioMock.EMAIL_DEMO} / ${RepositorioMock.SENHA_DEMO}",
+                "Demo: joao@exemplo.com ou maria@exemplo.com, senha senha123 (os mesmos usuários da API)",
                 style = MaterialTheme.typography.bodySmall
             )
         }

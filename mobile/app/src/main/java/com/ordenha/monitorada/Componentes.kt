@@ -77,3 +77,6 @@ fun formatarData(iso: String): String =
 
 // 6.8 -> "6,8" (sempre no formato brasileiro, independente do idioma do aparelho)
 fun formatarNumero(valor: Double): String = String.format(Locale("pt", "BR"), "%.1f", valor)
+
+/** Condutividade em mS, na escala do MastitAlert (leite normal em torno de 0,40): 3 casas. */
+fun formatarCondutividade(valor: Double): String = String.format(Locale("pt", "BR"), "%.3f", valor)

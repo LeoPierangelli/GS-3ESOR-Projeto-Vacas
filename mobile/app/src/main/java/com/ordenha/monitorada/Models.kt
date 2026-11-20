@@ -47,7 +47,7 @@ data class Tratamento(
     val vacaId: Int,
     val medicamento: String,
     val dataInicio: String,
-    val dataFim: String,
+    val dataFim: String?, // nulo = tratamento em andamento
     val diasCarencia: Int,
     val observacao: String
 )
