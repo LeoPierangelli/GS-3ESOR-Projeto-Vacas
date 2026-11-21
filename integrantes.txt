@@ -8,4 +8,5 @@ RM560637 - Maryelle Pereira Lopes
 RM559580 - Pedro Arão Baquini
 
 Vídeo pitch: https://youtu.be/Cz5no7r_b1U
+Vídeo do app funcionando: https://www.youtube.com/watch?v=n6WZFEs6yWc
 Repositório: https://github.com/LeoPierangelli/GS-3ESOR-Projeto-Vacas
